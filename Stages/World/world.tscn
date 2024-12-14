@@ -1,14 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://blwn251o6n0jr"]
+[gd_scene load_steps=5 format=3 uid="uid://blwn251o6n0jr"]
 
-[ext_resource type="Script" path="res://Stages/World/background.gd" id="1_8316s"]
 [ext_resource type="Script" path="res://Stages/World/asteroid_spawner.gd" id="2_7s4qs"]
+[ext_resource type="Texture2D" uid="uid://u7sr4vrstsxf" path="res://Stages/World/Background/Star_front.png" id="2_qv8wd"]
+[ext_resource type="Texture2D" uid="uid://dcy6ujecqgeqq" path="res://Stages/World/Background/Stars_mid.png" id="2_tvsux"]
+[ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="3_xle7e"]
 
-[node name="World" type="Node"]
-
-[node name="Background" type="ParallaxBackground" parent="."]
-script = ExtResource("1_8316s")
-
-[node name="Stars" type="ParallaxLayer" parent="Background"]
+[node name="World" type="Node2D"]
 
 [node name="AsteroidSpawner" type="Node2D" parent="."]
+visible = false
 script = ExtResource("2_7s4qs")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Front" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(576, 324)
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Front"]
+position = Vector2(576, 324)
+texture = ExtResource("2_qv8wd")
+centered = false
+
+[node name="Mid" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(576, 324)
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mid"]
+texture = ExtResource("2_tvsux")
+centered = false
+
+[node name="Back" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Back"]
+texture = ExtResource("3_xle7e")
+centered = false
