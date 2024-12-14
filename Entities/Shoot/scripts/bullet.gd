@@ -6,6 +6,7 @@ const TRANSITION_TIME = 3.0
 var base_width = 10
 var shoot = false
 var laser_reset = false
+var current_damage =10 # aktueller damage
 
 @onready var line2d    = $Line2D
 @onready var collision = $Line2D/DamageArea/CollisionShape2D
@@ -22,7 +23,7 @@ func _ready():
 	collision.disabled = true
 	line2d.visible = false
 	raycast.add_exception(get_parent()) 
-
+	
 
 
 	var laser_shader : Shader = Shader.new()
@@ -104,6 +105,7 @@ func _process(delta: float) -> void:
 		points[1] = line2d.to_local(reference.global_position)
 	else:
 		points[1] = raycast.target_position
+		
 
 	line2d.points = points
 
@@ -124,8 +126,19 @@ func _process(delta: float) -> void:
 		collision.shape.b = points[1]
 		collision.disabled = false
 		line2d.visible = true
+		if raycast.is_colliding():
+			print("ha")
+			var collider = raycast.get_collider()
+			if collider:
+				var parent_node = collider.get_parent()
+				if parent_node and parent_node.has_method("take_damage"):
+					parent_node.take_damage(current_damage) 
+
 	else:
 		collision.shape.a = Vector2.ZERO
 		collision.shape.b = Vector2.ZERO
 		collision.disabled = true
 		line2d.visible = false
+
+func set_damage(amount: int) -> void:
+	current_damage += amount
