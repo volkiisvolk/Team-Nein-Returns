@@ -1,104 +1,150 @@
 extends Node2D
 
-const maxrange = 5000  # Maximale Länge des Laserstrahls
-const TRANSITION_TIME = 3.0  # Zeit in Sekunden für die Farbanimation
+const MAX_RANGE = 1000
+const TRANSITION_TIME = 3.0
 
-var based_width = 10  # Grundbreite des Lasers
+var base_width = 10
 var shoot = false
-var resetet
+var laser_reset = false
+
+@onready var line2d    = $Line2D
 @onready var collision = $Line2D/DamageArea/CollisionShape2D
+@onready var raycast   = $RayCast2D
+@onready var reference = $Reference
+
+var tween : Tween = null
 
 func _ready():
+	# vorausgesetzt, dein Laser ist Child des Spieler-Nodes,
+	# dann ist get_parent() = Player.
+	# Laser ist unsichtbar, deaktiviert zu Beginn
 	shoot = false
 	collision.disabled = true
-	$Line2D.visible = false
+	line2d.visible = false
+	raycast.add_exception(get_parent()) 
 
-	# Shader initialisieren
-	if $Line2D.material and $Line2D.material is ShaderMaterial:
-		print("ShaderMaterial korrekt erkannt.")
+	# Inline-Shader erstellen (kombiniert PNG-Textur + Farbmodulation)
+	var shader_code = """
+		shader_type canvas_item;
+		// Additive Mischung für Neon-Effekt, unshaded ignoriert Lichter
+		render_mode blend_add, unshaded;
 
-		# Neon-Hellblau als Startfarbe setzen
-		$Line2D.material.set("shader_parameter/laser_color", Color(0.1, 0.9, 1.0, 1.0))  # Neon-Hellblau
-		$Line2D.material.set("shader_parameter/laser_width", 0.1)  # Breite setzen
-	else:
-		print("ShaderMaterial fehlt oder nicht korrekt verbunden!")
+		uniform vec4 laser_color : source_color = vec4(0.5, 0.8, 1.0, 1.0);
+		uniform float laser_width = 0.5;
 
-	# Tween-Animation starten
+		// PNG-Textur (Laser-Look)
+		uniform sampler2D laser_texture : hint_albedo;
+		// Steuert das UV-Mapping (Kachelung)
+		uniform float uv_scale = 1.0;
+
+		void fragment() {
+			vec4 tex_color = texture(laser_texture, UV * uv_scale);
+			// Laserfarbe und Textur kombinieren
+			COLOR = tex_color * laser_color;
+		}
+	"""
+
+	var laser_shader = Shader.new()
+	laser_shader.code = shader_code
+
+	var laser_material = ShaderMaterial.new()
+	laser_material.shader = laser_shader
+
+	# PNG-Textur laden (Pfad anpassen an dein Projekt)
+	var laser_png = preload("res://Entities/Shoot/Assets/Spirtes/11.png")
+	laser_material.set("shader_parameter/laser_texture", laser_png)
+
+	# Material zuweisen
+	line2d.material = laser_material
+
+	# Startwerte im Shader
+	if line2d.material and line2d.material is ShaderMaterial:
+		
+		line2d.material.set("shader_parameter/laser_color", Color(0.1, 0.9, 1.0, 1.0))  # Hellblau
+		line2d.material.set("shader_parameter/laser_width", 0.1)
+
+	# Farbtransition (Tweens) anwerfen
 	animate_color_transition()
 
-
 func animate_color_transition():
-	const start_color = Color(0.1, 0.9, 1.0, 1.0)
-	# Ziel ist Neon-Dunkelblau
-	var target_color = Color(0.0, 0.3, 1.0, 1.0)  # Neon-Dunkelblau
-	# Start ist die aktuelle Laserfarbe
-	print("Startfarbe:", start_color)
-	print("Zielwert:", target_color)
-	resetet = false
+	if tween:
+		tween.kill()
 
-	# Erstelle und starte die Tween-Animation
-	var tween = create_tween()
+	var start_color = Color(0.1, 0.9, 1.0, 1.0)   # Hellblau
+	var target_color = Color(0.0, 0.3, 1.0, 1.0)  # Dunkelblau
+
+	tween = create_tween()
 	tween.tween_property(
-		$Line2D.material,
+		line2d.material,
 		"shader_parameter/laser_color",
 		target_color,
 		TRANSITION_TIME
 	)
-	print("Tween erstellt und gestartet!")
+
+	laser_reset = false
+
 
 func reset_laser():
-	# Laser zurücksetzen auf Neon-Hellblau
-	if $Line2D.material and $Line2D.material is ShaderMaterial:
-		$Line2D.material.set("shader_parameter/laser_color", Color(0.1, 0.9, 1.0, 1.0))  # Neon-Hellblau
-	print("Laserfarbe zurückgesetzt.")
-	resetet = true
+	# Zurück zu Hellblau
+	if line2d.material and line2d.material is ShaderMaterial:
+		line2d.material.set("shader_parameter/laser_color", Color(0.1, 0.9, 1.0, 1.0))
+	laser_reset = true
 
-func _process(delta):
-	if resetet:
-		animate_color_transition()
+
+func _process(delta: float) -> void:
+	# >>> Steuerung: Maustaste drücken/loslassen
+	if Input.is_action_just_pressed("click"):
+		shoot = true
 	
-	# Zielposition des RayCasts berechnen, relativ zur aktuellen Node-Position
-	var mouse_position = $RayCast2D.to_local(get_global_mouse_position())
-	var direction = (mouse_position - $RayCast2D.position).normalized() # Richtung zur Maus
-	var max_cast_to = direction * maxrange  # Maximale Reichweite in die Richtung
-	$RayCast2D.target_position = max_cast_to
+	if Input.is_action_just_released("click"):
+		shoot = false
+		reset_laser()
 
-	# Prüfen, ob der RayCast eine Kollision erkannt hat
+	if laser_reset:
+		animate_color_transition()
+		
 	if $RayCast2D.is_colliding():
-		$Reference.global_position = $RayCast2D.get_collision_point()
-		var points = $Line2D.points
-		points[1] = $Line2D.to_local($Reference.global_position)  # Kollisionspunkt in lokale Koordinaten umwandeln
-		$Line2D.points = points
+		var collider = $RayCast2D.get_collider()
+
+
+	# >>> Laser-Startpunkt: (0,0) relativ zum Player
+	# Da dieser Laser-Node ein Kind vom Player ist, ist Node2D-Position = Spielerposition
+	var points = line2d.points
+	points[0] = Vector2.ZERO  # Laser beginnt am Spieler
+
+	# >>> RayCast-Berechnung
+	# Mausposition in lokale Koordinaten (relative zum Laser-Node -> Player)
+	var mouse_pos_local = raycast.to_local(get_global_mouse_position())
+	var direction = (mouse_pos_local - raycast.position).normalized()
+	raycast.target_position = direction * MAX_RANGE
+
+	if raycast.is_colliding():
+		reference.global_position = raycast.get_collision_point()
+		points[1] = line2d.to_local(reference.global_position)
 	else:
-		var points = $Line2D.points
-		points[1] = $RayCast2D.target_position  # Zielposition des RayCasts setzen
-		$Line2D.points = points
+		points[1] = raycast.target_position
 
-	# Dynamische Breite basierend auf der Entfernung
-	var length = $Line2D.points[1].length()
-	$Line2D.width = based_width + length * 0.01
+	line2d.points = points
 
-	# Shader-Parameter dynamisch setzen
-	if $Line2D.material and $Line2D.material is ShaderMaterial:
-		$Line2D.material.set("shader_parameter/dynamic_factor", length / maxrange)
-		$Line2D.material.set("shader_parameter/laser_width", $Line2D.width / 100.0)  # Breite im Shader aktualisieren
+	# >>> Dynamische Breite
+	var length = points[1].length()
+	line2d.width = base_width + length * 0.01
 
-	# Kollisionsbereich anpassen
+	# >>> Shader-Parameter
+	if line2d.material and line2d.material is ShaderMaterial:
+		# Skalierung der Textur basierend auf Länge (nur wenn gewünscht)
+		# line2d.material.set("shader_parameter/uv_scale", 1.0)
+		# Wir passen "laser_width" an line2d.width an, falls du das im Shader nutzen möchtest
+		line2d.material.set("shader_parameter/laser_width", line2d.width / 100.0)
+
+	# >>> CollisionShape2D anpassen
 	if shoot:
 		collision.shape.a = Vector2.ZERO
-		collision.shape.b = $Line2D.points[1]
+		collision.shape.b = points[1]
 		collision.disabled = false
-		$Line2D.visible = true
+		line2d.visible = true
 	else:
 		collision.shape.a = Vector2.ZERO
 		collision.shape.b = Vector2.ZERO
 		collision.disabled = true
-		$Line2D.visible = false
-		reset_laser()
-
-	# Eingabe für das Schießen
-	if Input.is_action_pressed("click"):
-		shoot = true
-	else:
-		shoot = false
-		reset_laser()  # Laser zurücksetzen, wenn nicht geschossen wird
+		line2d.visible = false
