@@ -4,6 +4,11 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+# Startwert für fuel
+var fuel = 100.0
+# Spritverbrauch pro Sekunde bei Bewegung
+const FUEL_CONSUMPTION_RATE = 1.0 
+
 func _ready() -> void:
 	pass
 
@@ -11,10 +16,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	move(delta)
-	
+	check_fuel(delta)
 	
 	
 func move(delta):
+
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
 		direction += Vector2.RIGHT
@@ -25,4 +31,15 @@ func move(delta):
 	if Input.is_action_pressed("ui_up"):
 		direction += Vector2.UP
 	position += direction.normalized() * SPEED * delta
-		
+	
+	# Wenn man sich bewegt
+	if direction != Vector2.ZERO:
+		fuel -= FUEL_CONSUMPTION_RATE * delta
+		fuel = max(fuel, 0) #Sicherstellen dass fuel > 0
+
+func check_fuel(delta):
+	if fuel <= 0:
+		print("Tank leer du opfer")
+		get_tree().quit() # Spiel ende
+	else:
+		print("Fuel remaining: %.2f" % fuel)
