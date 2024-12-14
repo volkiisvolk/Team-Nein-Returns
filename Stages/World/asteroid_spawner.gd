@@ -49,16 +49,13 @@ func _update_chunks(current_chunk):
 
 func _load_chunk(chunk_key):
 	var chunk_position = chunk_key * chunk_size
-
 	# Falls der Chunk bereits existiert, nur sichtbar machen
 	if active_chunks.has(chunk_key):
 		for asteroid in active_chunks[chunk_key]:
 			if asteroid and is_instance_valid(asteroid):
 				asteroid.visible = true
 		return
-
 	active_chunks[chunk_key] = []
-
 	# Spawn einzelner oder clusterweise Asteroiden
 	for i in range(randi_range(5, 10)):
 		var asteroid = _get_asteroid()
