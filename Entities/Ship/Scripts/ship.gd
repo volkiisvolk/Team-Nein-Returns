@@ -61,7 +61,7 @@ func update_rotation(delta: float) -> void:
 # prüft Tank
 func check_fuel(delta):
 	if fuel <= 0:
-		get_tree().quit() # Spielende
+		get_tree().change_scene_to_file("res://MainScreen/endscreen.tscn")
 		# Hier Code für Endscreen oder so
 	else:
 		update_fuel_display()
