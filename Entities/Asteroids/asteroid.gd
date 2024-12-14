@@ -48,13 +48,15 @@ func destroy():
 	"""
 	Zerstört den Asteroiden und erzeugt ggf. einen Drop.
 	"""
+	if $CollisionShape2D:
+		$CollisionShape2D.disabled = true
 	if drop_scene:
 		var drop_instance = drop_scene.instantiate()
 		drop_instance.set("color", random_color())
 		drop_instance.set("size", random_size())
 		drop_instance.position = position
 		get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
-	queue_free()  # Entferne den Asteroiden aus der Szene
+	call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
 	
 func random_color() -> String:
 	var colors = ["red", "blue", "green"]
