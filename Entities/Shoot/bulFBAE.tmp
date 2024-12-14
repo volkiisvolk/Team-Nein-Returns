@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bji84x6xrprv4"]
+
+[ext_resource type="Script" path="res://Entities/Shoot/scripts/bullet.gd" id="1_gqb60"]
+[ext_resource type="Shader" path="res://Entities/Shoot/scripts/bullet.gdshader" id="2_dvrdc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acgmb"]
+shader = ExtResource("2_dvrdc")
+shader_parameter/laser_color = Color(0, 0.5, 1, 1)
+shader_parameter/intensity = 3.0
+shader_parameter/dynamic_factor = 3.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0hroh"]
+b = Vector2(38, 0)
+
+[node name="Laser" type="Node2D"]
+position = Vector2(135, 136)
+script = ExtResource("1_gqb60")
+
+[node name="Reference" type="Sprite2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(311, 0)
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_acgmb")
+use_parent_material = true
+points = PackedVector2Array(0, 0, 38, 0)
+default_color = Color(0.761965, 0.925679, 0.994717, 1)
+
+[node name="DamageArea" type="Area2D" parent="Line2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/DamageArea"]
+shape = SubResource("SegmentShape2D_0hroh")
