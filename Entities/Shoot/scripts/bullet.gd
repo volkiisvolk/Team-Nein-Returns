@@ -6,6 +6,7 @@ const TRANSITION_TIME = 3.0
 var base_width = 10
 var shoot = false
 var laser_reset = false
+var current_damage =10 # aktueller damage
 
 @onready var line2d    = $Line2D
 @onready var collision = $Line2D/DamageArea/CollisionShape2D
@@ -131,10 +132,13 @@ func _process(delta: float) -> void:
 			if collider:
 				var parent_node = collider.get_parent()
 				if parent_node and parent_node.has_method("take_damage"):
-					parent_node.take_damage(10)  # 10 = Schaden
+					parent_node.take_damage(current_damage) 
 
 	else:
 		collision.shape.a = Vector2.ZERO
 		collision.shape.b = Vector2.ZERO
 		collision.disabled = true
 		line2d.visible = false
+
+func set_damage(amount: int) -> void:
+	current_damage += amount
