@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TeamNineReturns"
-run/main_scene="res://Stages/MainGame/game.tscn"
+run/main_scene="res://MainScreen/mainscreen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,7 +21,10 @@ Global="*res://Global/Global.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=3
+window/size/resizable=false
 
 [dotnet]
 

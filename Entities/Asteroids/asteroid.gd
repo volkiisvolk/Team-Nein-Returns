@@ -9,9 +9,27 @@ var direction = Vector2.ZERO
 
 
 var sprite_size: Dictionary = {
-	"small": 1,
-	"medium": 3,
-	"large": 7
+	"small": 0.4,
+	"medium": 1,
+	"large": 1.6
+}
+
+var image_data: Dictionary = {
+	"small": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	},
+	"medium": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	},
+	"large": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	}
 }
 
 @export var drop_scene: PackedScene
@@ -27,16 +45,21 @@ func _ready():
 		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
 func adjust_stats():
-	#TODO Verschiedene Texturen hier laden
-	var color_mapping = {"red": Color(1, 0, 0), "purple": Color(0, 0, 1), "green": Color(0, 1, 0)}
-	if $Sprite2D and color in color_mapping:
-		$Sprite2D.modulate = color_mapping[color]
+	$Sprite2D.texture = get_image(size,color)
+	$".".scale = get_size(size)
+
+
+func get_size(size: String) -> Vector2:
+	if size in sprite_size:
+		return Vector2(sprite_size[size],sprite_size[size])
+	print("Is null")
+	return Vector2(0,0)
 	
-
-	if $"." and size in sprite_size:
-		$".".apply_scale(Vector2(sprite_size[size],sprite_size[size]))
-
-		
+func get_image(size: String, color: String) -> Texture2D:
+	if size in image_data and color in image_data[size]:
+		return image_data[size][color]
+	print("Is null")
+	return null
 		
 func _process(delta):
 	# Bewege den Asteroiden

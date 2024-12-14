@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" path="res://Entities/Shoot/scripts/bullet.gd" id="1_gqb60"]
 [ext_resource type="Shader" path="res://Entities/Shoot/Assets/Shader/bullet.gdshader" id="2_dvrdc"]
-[ext_resource type="Texture2D" uid="uid://b545edo0xkq2q" path="res://Entities/Shoot/Assets/sprites/11.png" id="3_nax38"]
+[ext_resource type="Texture2D" uid="uid://b2a3xwjebo0tg" path="res://Entities/Shoot/Assets/sprites/laserbeam.png" id="3_6mvjq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etkej"]
 shader = ExtResource("2_dvrdc")
-shader_parameter/laser_color = Color(0.5, 0.8, 1, 1)
-shader_parameter/laser_width = 0.5
-shader_parameter/uv_scale = 1.0
+shader_parameter/glow_color = Color(1, 1, 0, 1)
+shader_parameter/glow_intensity = 1.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0hroh"]
 b = Vector2(38, 0)
@@ -36,7 +35,7 @@ collide_with_areas = true
 [node name="Line2D" type="Line2D" parent="."]
 material = SubResource("ShaderMaterial_etkej")
 points = PackedVector2Array(0, 0, 38, 0)
-texture = ExtResource("3_nax38")
+texture = ExtResource("3_6mvjq")
 texture_mode = 2
 
 [node name="DamageArea" type="Area2D" parent="Line2D"]

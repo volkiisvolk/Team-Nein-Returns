@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-
-uid="uid://dikq51k24bjud"
-path="res://.godot/imported/playersprite.png-e06340e0a9f984aba026c6017c6b36c1.ctex"
+uid="uid://b2a3xwjebo0tg"
+path="res://.godot/imported/laserbeam.png-56c9f579f6a088cdc509890a0cdfd113.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://playersprite.png"
-dest_files=["res://.godot/imported/playersprite.png-e06340e0a9f984aba026c6017c6b36c1.ctex"]
+source_file="res://Entities/Shoot/Assets/sprites/laserbeam.png"
+dest_files=["res://.godot/imported/laserbeam.png-56c9f579f6a088cdc509890a0cdfd113.ctex"]
 
 [params]
 
