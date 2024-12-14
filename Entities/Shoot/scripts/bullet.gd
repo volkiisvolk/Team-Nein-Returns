@@ -15,13 +15,13 @@ var laser_reset = false
 var tween : Tween = null
 
 func _ready():
-	raycast.add_exception(get_parent()) 
 	# vorausgesetzt, dein Laser ist Child des Spieler-Nodes,
 	# dann ist get_parent() = Player.
 	# Laser ist unsichtbar, deaktiviert zu Beginn
 	shoot = false
 	collision.disabled = true
 	line2d.visible = false
+	raycast.add_exception(get_parent()) 
 
 	# Inline-Shader erstellen (kombiniert PNG-Textur + Farbmodulation)
 	var shader_code = """
@@ -59,11 +59,9 @@ func _ready():
 
 	# Startwerte im Shader
 	if line2d.material and line2d.material is ShaderMaterial:
-		print("ShaderMaterial erkannt.")
+		
 		line2d.material.set("shader_parameter/laser_color", Color(0.1, 0.9, 1.0, 1.0))  # Hellblau
 		line2d.material.set("shader_parameter/laser_width", 0.1)
-	else:
-		print("ShaderMaterial fehlt oder nicht korrekt verbunden!")
 
 	# Farbtransition (Tweens) anwerfen
 	animate_color_transition()
@@ -90,7 +88,6 @@ func reset_laser():
 	# Zurück zu Hellblau
 	if line2d.material and line2d.material is ShaderMaterial:
 		line2d.material.set("shader_parameter/laser_color", Color(0.1, 0.9, 1.0, 1.0))
-	print("Laserfarbe zurückgesetzt.")
 	laser_reset = true
 
 
@@ -105,6 +102,10 @@ func _process(delta: float) -> void:
 
 	if laser_reset:
 		animate_color_transition()
+		
+	if $RayCast2D.is_colliding():
+		var collider = $RayCast2D.get_collider()
+
 
 	# >>> Laser-Startpunkt: (0,0) relativ zum Player
 	# Da dieser Laser-Node ein Kind vom Player ist, ist Node2D-Position = Spielerposition
