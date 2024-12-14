@@ -5,6 +5,8 @@ const JUMP_VELOCITY = -400.0
 
 var fuel = 100.0 # Startwert für fuel
 var max_fuel = 100.0 # Maximale Tankfüllung
+
+var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
@@ -36,7 +38,7 @@ func move(delta):
 		direction += Vector2.DOWN
 	if Input.is_action_pressed("ui_up"):
 		direction += Vector2.UP
-	position += direction.normalized() * SPEED * delta
+	position += direction.normalized() * current_speed * delta
 	
 	# Wenn man sich bewegt
 	if direction != Vector2.ZERO:
@@ -73,9 +75,13 @@ func refill_fuel(amount: float) -> void:
 	fuel = min(fuel, max_fuel) 
 	update_fuel_display()
 
-# aufrufen für upgrade
+# aufrufen für tank upgrade
 func upgrade_tank_capacity(amount: float) -> void:
 	max_fuel += amount
 	fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
 	update_fuel_display()
 	print("Tankkapazität erhöht auf  %.2f" % max_fuel)
+
+# aufrufen für speed upgrade
+func upgrade_speed(amount: float) -> void:
+	current_speed += amount
