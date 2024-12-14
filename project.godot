@@ -22,6 +22,7 @@ Global="*res://Global/Global.gd"
 [display]
 
 window/size/mode=3
+
 [input]
 
 click={
