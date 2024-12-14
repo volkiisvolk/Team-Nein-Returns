@@ -16,23 +16,18 @@ const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 @onready var bullet_scene = $Laser
 
 @onready var laser = $Laser 
+@onready var sprite = $Sprite # Node des Sprites (falls vorhanden)
 
 func _ready() -> void:
-	#var viewport_size = get_viewport().get_visible_rect().size
-	#hud.position = Vector2(viewport_size.x / 2 - hud.get_child(0).get_size().x / 2, 0)
 	laser.set_parent_ship(self)
-	# puff puff
-	pass
-
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	move(delta)
 	check_fuel(delta)
-	
+	update_rotation(delta) # Smooth Rotation hinzufügen
 	
 func move(delta):
-
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
 		direction += Vector2.RIGHT
@@ -47,20 +42,34 @@ func move(delta):
 	# Wenn man sich bewegt
 	if direction != Vector2.ZERO:
 		fuel -= FUEL_CONSUMPTION_RATE * delta
-		fuel = max(fuel, 0) #Sicherstellen dass fuel > 0
+		fuel = max(fuel, 0) # Sicherstellen, dass fuel > 0
 
-# prüft tank 
+# Smooth Rotation zur Mausposition
+func update_rotation(delta: float) -> void:
+	# Position der Maus relativ zum Schiff
+	var mouse_position = get_global_mouse_position()
+	var direction_to_mouse = mouse_position - global_position
+	
+	# Winkel zur Maus berechnen
+	var target_rotation = direction_to_mouse.angle()
+	
+	# Smooth rotation mit Interpolation
+	rotation = lerp_angle(rotation, target_rotation, 10 * delta)
+	if sprite:
+		sprite.rotation = rotation # Sprite folgt der Rotation
+
+# prüft Tank
 func check_fuel(delta):
 	if fuel <= 0:
-		get_tree().quit() # Spiel ende
-		# Hier code für End screen oder so
+		get_tree().quit() # Spielende
+		# Hier Code für Endscreen oder so
 	else:
 		update_fuel_display()
 
 # zeigt fuel an
 func update_fuel_display():
 	# Bestimme Anzahl der gefüllten Blocks
-	var total_blocks = int(max_fuel / 10) # 1 block pro 10 fuel im tank
+	var total_blocks = int(max_fuel / 10) # 1 Block pro 10 fuel im Tank
 	var filled_blocks = int((fuel / max_fuel) * total_blocks)
 	var empty_blocks = total_blocks - filled_blocks
 	
@@ -69,57 +78,52 @@ func update_fuel_display():
 	# Aktualisiere Label
 	fuel_label.text = fuel_bar
 
-# ruf das auf von ausen irgendwie
+# ruf das von außen auf
 func refill_fuel(amount: float) -> void:
-	# füge die gegebene Menge hinzu
+	# Füge die gegebene Menge hinzu
 	fuel += amount
-	# sicherstellen, dass der Tank nicht über das Maximum geht
+	# Sicherstellen, dass der Tank nicht über das Maximum geht
 	fuel = min(fuel, max_fuel) 
 	update_fuel_display()
 
-# aufrufen für tank upgrade
+# aufrufen für Tank-Upgrade
 func upgrade_tank_capacity(amount: float) -> void:
 	max_fuel += amount
 	fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
 	update_fuel_display()
 	print("Tankkapazität erhöht auf  %.2f" % max_fuel)
 
-# aufrufen für speed upgrade
+# aufrufen für Speed-Upgrade
 func upgrade_speed(amount: float) -> void:
 	current_speed += amount
 	print("current_speed: %.2f" % current_speed)
 
-# aufrufen für damage Verbesserung
+# aufrufen für Damage-Verbesserung
 func upgrade_damage(amount: int) -> void:
 	bullet_scene.set_damage(amount)
 
-
 """
-Logic für das Craften
+Logik für das Craften
 """
 func reset_inventory() -> void:
 	crafting_inventory = ["null", "null"]
 
 # Fügt den Drop dem Inventar hinzu
 func add_drop_to_inventory(color: String, size: String) -> void:
-	#Check ob inventory voll ist (beide Slots belegt)
-	if(crafting_inventory[0] == "null"):
+	# Check, ob Inventory voll ist (beide Slots belegt)
+	if crafting_inventory[0] == "null":
 		crafting_inventory[0] = color
-	elif (crafting_inventory[1] == "null"):
+	elif crafting_inventory[1] == "null":
 		crafting_inventory[1] = color
 		craft_upgrades(color, size)
 	
-	
 func craft_upgrades(color: String, size: String) -> void:
-	#Die var node_ship ist für den Zugriff auf das Script ship.
-	if(crafting_inventory[1] != "null"):
-		
-		# Wenn zwei gleiche Farbeb gesammelt wurden -> tank füllen
-		if(crafting_inventory[0] == crafting_inventory[1]):
+	# Wenn das Inventory voll ist
+	if crafting_inventory[1] != "null":
+		# Wenn zwei gleiche Farben gesammelt wurden -> Tank füllen
+		if crafting_inventory[0] == crafting_inventory[1]:
 			print("Fuel ADD")
-			# TODO der Wert muss der Funktion übergeben werden
 			refill_fuel(20)
-			# Leere das Inventory
 			reset_inventory()
 		else:
 			match crafting_inventory[0]:
@@ -127,12 +131,8 @@ func craft_upgrades(color: String, size: String) -> void:
 					upgrade_damage(10.0)
 					reset_inventory()
 				"blue":
-					#updgrade_fuel
 					update_fuel_display()
 					reset_inventory()
 				"green":
 					upgrade_speed(10.0)
 					reset_inventory()
-				
-				
-		
