@@ -117,6 +117,10 @@ func add_drop_to_inventory(color: String, size: String) -> void:
 		crafting_inventory[1] = color
 		craft_upgrades(color, size)
 	
+func on_drop_collected():
+	pass
+	
+	
 func craft_upgrades(color: String, size: String) -> void:
 	# Wenn das Inventory voll ist
 	if crafting_inventory[1] != "null":
