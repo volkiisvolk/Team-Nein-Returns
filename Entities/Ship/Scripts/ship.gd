@@ -34,8 +34,6 @@ func move(delta):
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
 		direction += Vector2.RIGHT
-		#Nur zu testzwecekn
-		add_drop_to_inventory("red", "red")
 	if Input.is_action_pressed("ui_left"):
 		direction += Vector2.LEFT
 	if Input.is_action_pressed("ui_down"):
@@ -101,8 +99,6 @@ func reset_inventory() -> void:
 
 # Fügt den Drop dem Inventar hinzu
 func add_drop_to_inventory(color: String, size: String) -> void:
-	print("Add to inventory")
-	print(crafting_inventory)
 	#Check ob inventory voll ist (beide Slots belegt)
 	if(crafting_inventory[0] == "null"):
 		crafting_inventory[0] = color
