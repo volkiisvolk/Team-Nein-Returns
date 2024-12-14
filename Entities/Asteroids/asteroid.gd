@@ -1,24 +1,35 @@
 extends Node2D
 
 @export var speed = 50.0
-var direction = Vector2.ZERO
-
 @export var size: String = "medium"  # Größe des Asteroiden
 @export var color: String = "blue"  # Farbe des Asteroiden
-var health: int = 100  # Lebenspunkte des Asteroiden
+@export var health: int = 100  # Lebenspunkte des Asteroiden
+var direction = Vector2.ZERO
+
+var sprite_size: Dictionary = {
+	"small": 1,
+	"medium": 3,
+	"large": 7
+}
+
 @export var drop_scene: PackedScene
 
 func _ready():
 	# Initialisiere Lebenspunkte basierend auf der Größe
 	
 	direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
-	adjust_visual()
+	adjust_stats()
 	
-func adjust_visual():
+func adjust_stats():
 	#TODO Verschiedene Texturen hier laden
 	var color_mapping = {"red": Color(1, 0, 0), "blue": Color(0, 0, 1), "green": Color(0, 1, 0)}
 	if $Sprite2D and color in color_mapping:
 		$Sprite2D.modulate = color_mapping[color]
+	
+
+	if $"." and size in sprite_size:
+		$".".apply_scale(Vector2(sprite_size[size],sprite_size[size]))
+
 		
 		
 func _process(delta):

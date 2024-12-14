@@ -14,6 +14,11 @@ var asteroid_pool = []
 var sizes = ["small", "medium", "large"]
 var colors = ["red", "blue", "green"]
 # Lebenspunkte basierend auf der Größe
+var size_speed_mapping: Dictionary = {
+	"small": 50,
+	"medium": 40,
+	"large": 10
+}
 var size_health_mapping: Dictionary = {
 	"small": 50,
 	"medium": 100,
@@ -98,6 +103,7 @@ func _get_asteroid():
 	new_asteroid.size = random_size
 	new_asteroid.color = random_color
 	new_asteroid.health = size_health_mapping[random_size]
+	new_asteroid.speed = size_speed_mapping[random_size]
 		
 	asteroid_pool.append(new_asteroid)
 	add_child(new_asteroid)
