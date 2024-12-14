@@ -1,5 +1,7 @@
 extends Node2D
 
+
+## Layer 4 ist Collison für diese Area
 @export var color: String  # Eigenschaften des Drops (z. B. Farbe)
 @export var size: String  # Größe des Drops (z. B. small, medium, large)
 
