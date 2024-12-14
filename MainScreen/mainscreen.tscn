@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://tq5fll4yirnd"]
+[gd_scene load_steps=9 format=3 uid="uid://tq5fll4yirnd"]
 
 [ext_resource type="Script" path="res://MainScreen/mainscreen.gd" id="1_2et5m"]
+[ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="2_4n2mf"]
+[ext_resource type="FontFile" uid="uid://b5pjuuf5og2x5" path="res://MainScreen/Fonts/Cube.ttf" id="3_1axar"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/start_button.gd" id="3_ky6y8"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/options_button.gd" id="4_l60ua"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/quit_button.gd" id="5_8k04p"]
+[ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="7_l03mi"]
+
+[sub_resource type="FontVariation" id="FontVariation_mkvn4"]
+base_font = ExtResource("2_4n2mf")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,27 +20,80 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2et5m")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 550.0
-offset_top = 250.0
-offset_right = 620.0
-offset_bottom = 351.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.5
+offset_top = -34.0
+offset_right = 166.5
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_mkvn4")
+theme_override_font_sizes/font_size = 50
 text = "Start"
+flat = true
+script = ExtResource("3_ky6y8")
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4n2mf")
+theme_override_font_sizes/font_size = 50
 text = "Options
 "
+flat = true
+script = ExtResource("4_l60ua")
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4n2mf")
+theme_override_font_sizes/font_size = 50
 text = "Quit
 "
+flat = true
+script = ExtResource("5_8k04p")
 
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -224.0
+offset_right = 20.0
+offset_bottom = -184.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="CenterContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_1axar")
+theme_override_font_sizes/font_size = 70
+text = "Raumschiff
+"
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("7_l03mi")
+centered = false
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/StartButton" to="CenterContainer/VBoxContainer/StartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/StartButton" to="CenterContainer/VBoxContainer/StartButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/OptionsButton" to="CenterContainer/VBoxContainer/OptionsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/OptionsButton" to="CenterContainer/VBoxContainer/OptionsButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/QuitButton" to="CenterContainer/VBoxContainer/QuitButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/QuitButton" to="CenterContainer/VBoxContainer/QuitButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
