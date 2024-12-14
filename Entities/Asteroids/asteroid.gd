@@ -2,7 +2,7 @@ extends Node2D
 
 @export var speed = 50.0
 @export var size: String = "medium"  # Größe des Asteroiden
-@export var color: String = "blue"  # Farbe des Asteroiden
+@export var color: String = "purple"  # Farbe des Asteroiden
 @export var health: int = 100  # Lebenspunkte des Asteroiden
 var direction = Vector2.ZERO
 
@@ -22,7 +22,7 @@ func _ready():
 	
 func adjust_stats():
 	#TODO Verschiedene Texturen hier laden
-	var color_mapping = {"red": Color(1, 0, 0), "blue": Color(0, 0, 1), "green": Color(0, 1, 0)}
+	var color_mapping = {"red": Color(1, 0, 0), "purple": Color(0, 0, 1), "green": Color(0, 1, 0)}
 	if $Sprite2D and color in color_mapping:
 		$Sprite2D.modulate = color_mapping[color]
 	
@@ -52,8 +52,8 @@ func destroy():
 		$CollisionShape2D.disabled = true
 	if drop_scene:
 		var drop_instance = drop_scene.instantiate()
-		drop_instance.set("color", random_color())
-		drop_instance.set("size", random_size())
+		drop_instance.size = size
+		drop_instance.color = color
 		drop_instance.position = position
 		get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
 	call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
