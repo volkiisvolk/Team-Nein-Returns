@@ -39,6 +39,7 @@ func move(delta):
 		fuel -= FUEL_CONSUMPTION_RATE * delta
 		fuel = max(fuel, 0) #Sicherstellen dass fuel > 0
 
+# prüft tank 
 func check_fuel(delta):
 	if fuel <= 0:
 		print("Tank leer du opfer")
@@ -48,6 +49,7 @@ func check_fuel(delta):
 		update_fuel_display()
 		print("Fuel remaining: %.2f" % fuel)
 
+# zeigt fuel an
 func update_fuel_display():
 	print("hea")
 	# Bestimme Anzahl der gefüllten Blocks
@@ -58,3 +60,12 @@ func update_fuel_display():
 	var fuel_bar = "█".repeat(filled_blocks) + "░".repeat(empty_blocks)
 	# Aktualisiere Label
 	fuel_label.text = fuel_bar
+
+# ruf das auf von ausen irgendwie
+func refill_fuel(amount: float) -> void:
+	# füge die gegebene Menge hinzu
+	fuel += amount
+	# sicherstellen, dass der Tank nicht über das Maximum geht
+	fuel = min(fuel, MAX_FUEL) 
+	update_fuel_display()
+	
