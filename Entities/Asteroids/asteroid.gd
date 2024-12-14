@@ -6,6 +6,8 @@ extends Node2D
 @export var health: int = 100  # Lebenspunkte des Asteroiden
 var direction = Vector2.ZERO
 
+
+
 var sprite_size: Dictionary = {
 	"small": 1,
 	"medium": 3,
@@ -19,6 +21,10 @@ func _ready():
 	
 	direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 	adjust_stats()
+	
+	# Verbindung des Signals für die Kollisionserkennung
+	if $Area2D:
+		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
 func adjust_stats():
 	#TODO Verschiedene Texturen hier laden
@@ -65,3 +71,15 @@ func random_color() -> String:
 func random_size() -> String:
 	var sizes = ["small", "medium", "large"]
 	return sizes[randi() % sizes.size()]
+
+
+func _on_area_2d_body_entered(body) -> void:
+	if body.name == "Ship":
+		on_collision_with_ship(body)
+
+#Reduziert den Fuel des Schiffs bei einer Kollision.
+func on_collision_with_ship(ship):
+	if ship and ship.has_method("refill_fuel"):
+		ship.refill_fuel(-10)  # Reduziert den Tank um 10 Einheiten
+		print("Ship fuel reduced due to asteroid collision!")
+		#destroy()
