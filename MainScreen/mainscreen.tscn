@@ -20,6 +20,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2et5m")
 
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_l03mi")
+expand_mode = 2
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -83,10 +93,6 @@ theme_override_fonts/font = ExtResource("3_1axar")
 theme_override_font_sizes/font_size = 70
 text = "Raumschiff
 "
-
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("7_l03mi")
-centered = false
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/StartButton" to="CenterContainer/VBoxContainer/StartButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/StartButton" to="CenterContainer/VBoxContainer/StartButton" method="_on_mouse_exited"]
