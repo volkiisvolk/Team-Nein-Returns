@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bswwuqiyctq8q"]
+[gd_scene load_steps=7 format=3 uid="uid://b2xhrjcoi8cnl"]
 
 [ext_resource type="Script" path="res://MainScreen/options.gd" id="1_whuit"]
 [ext_resource type="Script" path="res://MainScreen/volume_slider.gd" id="2_15rg2"]
+[ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="2_cb757"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/continue_button.gd" id="3_b1r6m"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/back_to_menu.gd" id="5_fi7qe"]
+[ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="6_46lrw"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -12,32 +16,80 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_whuit")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 550.0
-offset_top = 250.0
-offset_right = 668.0
-offset_bottom = 363.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.5
+offset_top = -61.0
+offset_right = 174.5
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
+theme_override_constants/separation = 110
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cb757")
+theme_override_font_sizes/font_size = 50
 text = "Continue
 "
+flat = true
+script = ExtResource("3_b1r6m")
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Back to Menu" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cb757")
+theme_override_font_sizes/font_size = 50
+text = "Back to Menu
+"
+flat = true
+script = ExtResource("5_fi7qe")
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -39.0
+offset_right = 185.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer2/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cb757")
+theme_override_font_sizes/font_size = 50
 text = "Master Volume
 "
 
-[node name="master_slider" type="HSlider" parent="VBoxContainer"]
+[node name="master_slider" type="HSlider" parent="CenterContainer2/VBoxContainer"]
 layout_mode = 2
+value = 20.0
 script = ExtResource("2_15rg2")
 bus_name = "Master"
 
-[node name="Back to Menu" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Back to Menu
-"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("6_46lrw")
+centered = false
 
-[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Back to Menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/ContinueButton" to="CenterContainer/VBoxContainer/ContinueButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/ContinueButton" to="CenterContainer/VBoxContainer/ContinueButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Back to Menu" to="CenterContainer/VBoxContainer/Back to Menu" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Back to Menu" to="CenterContainer/VBoxContainer/Back to Menu" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Back to Menu" to="." method="_on_back_to_menu_pressed"]
