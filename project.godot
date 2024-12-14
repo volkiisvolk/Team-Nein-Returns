@@ -19,6 +19,9 @@ config/icon="res://icon.svg"
 
 Global="*res://Global/Global.gd"
 
+[display]
+
+window/size/mode=3
 [input]
 
 click={
@@ -30,3 +33,4 @@ click={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.0562916, 0.0562916, 0.0562916, 1)
