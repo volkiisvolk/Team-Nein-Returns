@@ -2,7 +2,7 @@ extends Node2D
 
 const MAX_RANGE = 1000
 const TRANSITION_TIME = 3.0
-const FUEL_USAGE_ON_SHOOT = 0.2 # Spritverbrauch beim schießen
+const FUEL_USAGE_ON_SHOOT = -0.2 # Spritverbrauch beim schießen
 
 var base_width = 10
 var shoot = false
