@@ -1,23 +1,17 @@
-shader_type canvas_item;
+	shader_type canvas_item;
+		// Additive Mischung für Neon-Effekt, unshaded ignoriert Lichter
+		render_mode blend_add, unshaded;
 
-// Glow und Standard-Shader-Einstellungen
-render_mode blend_add, unshaded;
+		uniform vec4 laser_color : source_color = vec4(0.5, 0.8, 1.0, 1.0);
+		uniform float laser_width = 0.5;
 
-// Uniform für die Farbe des Glow-Effekts
-uniform vec4 glow_color : source_color = vec4(1.0, 1.0, 0.0, 1.0); // Gelb
-// Uniform für die Stärke des Glows
-uniform float glow_intensity = 1.0;
+		// PNG-Textur (Laser-Look)
+		uniform sampler2D laser_texture : source_color;
+		// Steuert das UV-Mapping (Kachelung)
+		uniform float uv_scale = 1.0;
 
-// Optionale Textur für den Glow
-uniform sampler2D glow_texture : source_color;
-
-void fragment() {
-    // Berechnung der Texturfarbe basierend auf den UV-Koordinaten
-    vec4 tex_color = texture(glow_texture, UV);
-
-    // Kombiniere die Texturfarbe mit der Glow-Farbe und -Intensität
-    vec4 combined_color = tex_color * glow_color * glow_intensity;
-
-    // Setze die kombinierte Farbe als Ausgabe
-    COLOR = combined_color;
-}
+		void fragment() {
+			vec4 tex_color = texture(laser_texture, UV * uv_scale);
+			// Laserfarbe und Textur kombinieren
+			COLOR = tex_color * laser_color;
+		}
