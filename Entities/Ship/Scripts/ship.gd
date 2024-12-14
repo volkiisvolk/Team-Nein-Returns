@@ -9,8 +9,12 @@ const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
 @onready var fuel_label = $HUD/FuelLabel
+@onready var hud = $HUD
 
 func _ready() -> void:
+	#var viewport_size = get_viewport().get_visible_rect().size
+	#hud.position = Vector2(viewport_size.x / 2 - hud.get_child(0).get_size().x / 2, 0)
+
 	# puff puff
 	pass
 
@@ -57,7 +61,7 @@ func update_fuel_display():
 	var empty_blocks = FUEL_BLOCKS - filled_blocks
 	
 	# Erstelle Anzeige 
-	var fuel_bar = "█".repeat(filled_blocks) + "░".repeat(empty_blocks)
+	var fuel_bar = " █".repeat(filled_blocks) + " ░".repeat(empty_blocks)
 	# Aktualisiere Label
 	fuel_label.text = fuel_bar
 
