@@ -5,10 +5,20 @@ extends Node2D
 @export var view_distance = 5 # Angepasst für Fullscreen (größerer Sichtbereich)
 
 var active_chunks = {} # Gespeicherte aktive Chunks
-var asteroid_scene = preload("res://Stages/World/Asteroids/asteroid.tscn")
+var asteroid_scene = preload("res://Entities/Asteroids/asteroid.tscn")
 var player_node = null # Referenz auf den Spieler
 var last_chunk = null
 var asteroid_pool = []
+
+# Mögliche Eigenschaften für Asteroiden
+var sizes = ["small", "medium", "large"]
+var colors = ["red", "blue", "green"]
+# Lebenspunkte basierend auf der Größe
+var size_health_mapping: Dictionary = {
+	"small": 50,
+	"medium": 100,
+	"large": 200
+}
 
 func _ready():
 	# Spieler-Node initialisieren
@@ -82,6 +92,13 @@ func _get_asteroid():
 		if not asteroid.visible:
 			return asteroid
 	var new_asteroid = asteroid_scene.instantiate()
+	var random_size = sizes[randi() % sizes.size()]
+	var random_color = colors[randi() % colors.size()]
+	
+	new_asteroid.size = random_size
+	new_asteroid.color = random_color
+	new_asteroid.health = size_health_mapping[random_size]
+		
 	asteroid_pool.append(new_asteroid)
 	add_child(new_asteroid)
 	return new_asteroid
