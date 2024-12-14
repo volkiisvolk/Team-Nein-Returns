@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj18gkibuuvjk"]
+[gd_scene load_steps=3 format=3 uid="uid://bj18gkibuuvjk"]
 
-[ext_resource type="PackedScene" uid="uid://bji84x6xrprv4" path="res://Entities/Shoot/bullet.tscn" id="1_78lbr"]
 [ext_resource type="PackedScene" uid="uid://blwn251o6n0jr" path="res://Stages/World/world.tscn" id="1_qa4c1"]
 [ext_resource type="PackedScene" uid="uid://c2q384qq8ce6s" path="res://Entities/Ship/ship.tscn" id="2_y2t7q"]
 
 [node name="Game" type="Node2D"]
-
-[node name="Laser" parent="." instance=ExtResource("1_78lbr")]
-position = Vector2(493, 399)
 
 [node name="World" parent="." instance=ExtResource("1_qa4c1")]
 
