@@ -127,7 +127,7 @@ func _process(delta: float) -> void:
 		collision.disabled = false
 		line2d.visible = true
 		if raycast.is_colliding():
-			print("ha")
+			#print("ha")
 			var collider = raycast.get_collider()
 			if collider:
 				var parent_node = collider.get_parent()

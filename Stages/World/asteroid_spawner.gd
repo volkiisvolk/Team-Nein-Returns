@@ -12,7 +12,7 @@ var asteroid_pool = []
 
 # Mögliche Eigenschaften für Asteroiden
 var sizes = ["small", "medium", "large"]
-var colors = ["red", "blue", "green"]
+var colors = ["red", "purple", "green"]
 # Lebenspunkte basierend auf der Größe
 var size_speed_mapping: Dictionary = {
 	"small": 50,
