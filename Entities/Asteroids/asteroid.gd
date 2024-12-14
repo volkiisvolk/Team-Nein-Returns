@@ -5,14 +5,29 @@ extends Node2D
 @export var color: String = "purple"  # Farbe des Asteroiden
 @export var health: int = 100  # Lebenspunkte des Asteroiden
 var direction = Vector2.ZERO
-var smallScoreValue = 5
-var mediumScoreValue = 10
-var largeScoreValue = 15
 
 var sprite_size: Dictionary = {
-	"small": 1,
-	"medium": 3,
-	"large": 7
+	"small": 0.4,
+	"medium": 1,
+	"large": 1.6
+}
+
+var image_data: Dictionary = {
+	"small": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	},
+	"medium": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	},
+	"large": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	}
 }
 
 @export var drop_scene: PackedScene
@@ -31,11 +46,13 @@ func adjust_stats():
 func get_size(size: String) -> Vector2:
 	if size in sprite_size:
 		return Vector2(sprite_size[size],sprite_size[size])
+	print("Is null")
 	return Vector2(0,0)
 	
 func get_image(size: String, color: String) -> Texture2D:
 	if size in image_data and color in image_data[size]:
 		return image_data[size][color]
+	print("Is null")
 	return null
 		
 func _process(delta):
@@ -56,11 +73,6 @@ func destroy():
 	"""
 	if $CollisionShape2D:
 		$CollisionShape2D.disabled = true
-	match size:
-		"small": Global.update_highscore(smallScoreValue)
-		"medium": Global.update_highscore(mediumScoreValue)
-		"large": Global.update_highscore(largeScoreValue)
-		
 	if drop_scene:
 		var drop_instance = drop_scene.instantiate()
 		drop_instance.size = size
@@ -68,7 +80,7 @@ func destroy():
 		drop_instance.position = position
 		get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
 	call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
-	print(Global.highscore)
+	
 func random_color() -> String:
 	var colors = ["red", "blue", "green"]
 	return colors[randi() % colors.size()]
