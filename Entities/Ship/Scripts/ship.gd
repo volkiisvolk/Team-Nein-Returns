@@ -32,7 +32,6 @@ func move(delta):
 
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
-		upgrade_tank_capacity(50)
 		direction += Vector2.RIGHT
 	if Input.is_action_pressed("ui_left"):
 		direction += Vector2.LEFT
