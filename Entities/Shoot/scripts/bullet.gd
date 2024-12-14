@@ -2,6 +2,7 @@ extends Node2D
 
 const MAX_RANGE = 1000
 const TRANSITION_TIME = 3.0
+const FUEL_USAGE_ON_SHOOT = -0.2 # Spritverbrauch beim schießen
 
 var base_width = 10
 var shoot = false
@@ -14,6 +15,7 @@ var current_damage =10 # aktueller damage
 @onready var reference = $Reference
 
 var tween : Tween = null
+var parent_ship = null # Referenz auf ship
 
 func _ready():
 	# vorausgesetzt, dein Laser ist Child des Spieler-Nodes,
@@ -47,6 +49,9 @@ func _ready():
 
 	# Farbtransition (Tweens) anwerfen
 	animate_color_transition()
+
+func set_parent_ship(ship):
+	parent_ship = ship #Referenz auf das Schiff setzen
 
 func animate_color_transition():
 	if tween:
@@ -126,6 +131,11 @@ func _process(delta: float) -> void:
 		collision.shape.b = points[1]
 		collision.disabled = false
 		line2d.visible = true
+		
+		# verbrauch sprit in schiff
+		if parent_ship:
+			parent_ship.refill_fuel(FUEL_USAGE_ON_SHOOT)
+		
 		if raycast.is_colliding():
 			#print("ha")
 			var collider = raycast.get_collider()
