@@ -1,15 +1,17 @@
 extends CharacterBody2D
 
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-# Startwert für fuel
-var fuel = 100.0
-# Spritverbrauch pro Sekunde bei Bewegung
-const FUEL_CONSUMPTION_RATE = 1.0 
+var fuel = 100.0 # Startwert für fuel
+const MAX_FUEL = 100.0 # Maximale Tankfüllung
+const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
+const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
+
+@onready var fuel_label = $HUD/FuelLabel
 
 func _ready() -> void:
+	# puff puff
 	pass
 
 
@@ -41,5 +43,18 @@ func check_fuel(delta):
 	if fuel <= 0:
 		print("Tank leer du opfer")
 		get_tree().quit() # Spiel ende
+		# Hier code für End screen oder so
 	else:
+		update_fuel_display()
 		print("Fuel remaining: %.2f" % fuel)
+
+func update_fuel_display():
+	print("hea")
+	# Bestimme Anzahl der gefüllten Blocks
+	var filled_blocks = int((fuel / MAX_FUEL) * FUEL_BLOCKS)
+	var empty_blocks = FUEL_BLOCKS - filled_blocks
+	
+	# Erstelle Anzeige 
+	var fuel_bar = "█".repeat(filled_blocks) + "░".repeat(empty_blocks)
+	# Aktualisiere Label
+	fuel_label.text = fuel_bar
