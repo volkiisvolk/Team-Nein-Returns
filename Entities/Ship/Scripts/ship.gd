@@ -4,7 +4,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var fuel = 100.0 # Startwert für fuel
-const MAX_FUEL = 100.0 # Maximale Tankfüllung
+var max_fuel = 100.0 # Maximale Tankfüllung
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
@@ -57,7 +57,7 @@ func check_fuel(delta):
 func update_fuel_display():
 	print("hea")
 	# Bestimme Anzahl der gefüllten Blocks
-	var filled_blocks = int((fuel / MAX_FUEL) * FUEL_BLOCKS)
+	var filled_blocks = int((fuel / max_fuel) * FUEL_BLOCKS)
 	var empty_blocks = FUEL_BLOCKS - filled_blocks
 	
 	# Erstelle Anzeige 
@@ -70,6 +70,12 @@ func refill_fuel(amount: float) -> void:
 	# füge die gegebene Menge hinzu
 	fuel += amount
 	# sicherstellen, dass der Tank nicht über das Maximum geht
-	fuel = min(fuel, MAX_FUEL) 
+	fuel = min(fuel, max_fuel) 
 	update_fuel_display()
-	
+
+# aufrufen für upgrade
+func upgrade_tank_capacity(amount: float) -> void:
+	max_fuel += amount
+	fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
+	update_fuel_display()
+	print("Tankkapazität erhöht auf  %.2f" % max_fuel)
