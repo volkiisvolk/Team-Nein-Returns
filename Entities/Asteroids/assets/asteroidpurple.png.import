@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b545edo0xkq2q"
-path="res://.godot/imported/11.png-7a68c8ac16db184c0b66527b22fe6133.ctex"
+uid="uid://vkha8h7uvf7t"
+path="res://.godot/imported/asteroidpurple.png-4662958328a70ca65ed8cde993bbd175.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Shoot/Assets/Spirtes/11.png"
-dest_files=["res://.godot/imported/11.png-7a68c8ac16db184c0b66527b22fe6133.ctex"]
+source_file="res://Entities/Asteroids/assets/asteroidpurple.png"
+dest_files=["res://.godot/imported/asteroidpurple.png-4662958328a70ca65ed8cde993bbd175.ctex"]
 
 [params]
 
