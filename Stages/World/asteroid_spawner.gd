@@ -41,18 +41,7 @@ func _update_chunks(current_chunk):
 			chunks_to_keep[chunk_key] = active_chunks[chunk_key]
 		else:
 			_unload_chunk(chunk_key)
-
 	active_chunks = chunks_to_keep
-
-	# Behalte alle Chunks in Reichweite
-	for chunk_key in active_chunks.keys():
-		if chunk_key.distance_to(current_chunk) <= view_distance:
-			chunks_to_keep[chunk_key] = active_chunks[chunk_key]
-		else:
-			_unload_chunk(chunk_key)
-
-	active_chunks = chunks_to_keep
-
 	# Deaktiviere entfernte Chunks
 	for chunk_key in active_chunks.keys():
 		if not chunks_to_keep.has(chunk_key):
