@@ -16,6 +16,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_whuit")
 
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_right = 768.0
+offset_bottom = 437.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_46lrw")
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -82,10 +94,6 @@ layout_mode = 2
 value = 20.0
 script = ExtResource("2_15rg2")
 bus_name = "Master"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("6_46lrw")
-centered = false
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/ContinueButton" to="CenterContainer/VBoxContainer/ContinueButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/ContinueButton" to="CenterContainer/VBoxContainer/ContinueButton" method="_on_mouse_exited"]

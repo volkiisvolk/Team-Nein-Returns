@@ -23,6 +23,10 @@ Global="*res://Global/Global.gd"
 
 window/size/mode=3
 
+[dotnet]
+
+project/assembly_name="TeamNineReturns"
+
 [input]
 
 ui_left={
