@@ -146,10 +146,9 @@ func random_size_gen() -> String:
 		accumulated_weight += weights[size]
 
 		# Debug-Ausgaben zur Nachverfolgung
-		print("Prüfe Größe:", size, "Gewichtung:", accumulated_weight, "Random-Wert:", random_value)
+		
 
 		if random_value < accumulated_weight:
-			print("Größe gewählt:", size)
 			return size  # Rückgabe der Größe
 
 	# Fallback (sollte nie erreicht werden)

@@ -46,13 +46,11 @@ func adjust_stats():
 func get_size(size: String) -> Vector2:
 	if size in sprite_size:
 		return Vector2(sprite_size[size],sprite_size[size])
-	print("Is null")
 	return Vector2(0,0)
 	
 func get_image(size: String, color: String) -> Texture2D:
 	if size in image_data and color in image_data[size]:
 		return image_data[size][color]
-	print("Is null")
 	return null
 		
 func _process(delta):
