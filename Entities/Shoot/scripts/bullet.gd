@@ -35,7 +35,7 @@ func _ready():
 	laser_material.shader = laser_shader
 
 	# PNG-Textur laden (Pfad anpassen an dein Projekt)
-	var laser_png = preload("res://Entities/Shoot/Assets/Spirtes/11.png")
+	var laser_png = preload("res://Entities/Shoot/Assets/sprites/11.png")
 	laser_material.set("shader_parameter/laser_texture", laser_png)
 
 	# Material zuweisen

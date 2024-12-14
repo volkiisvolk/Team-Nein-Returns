@@ -102,8 +102,6 @@ func reset_inventory() -> void:
 
 # Fügt den Drop dem Inventar hinzu
 func add_drop_to_inventory(color: String, size: String) -> void:
-	print("Add to inventory")
-	print(crafting_inventory)
 	#Check ob inventory voll ist (beide Slots belegt)
 	if(crafting_inventory[0] == "null"):
 		crafting_inventory[0] = color

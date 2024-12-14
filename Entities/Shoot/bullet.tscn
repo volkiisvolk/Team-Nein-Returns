@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Entities/Shoot/scripts/bullet.gd" id="1_gqb60"]
 [ext_resource type="Shader" path="res://Entities/Shoot/Assets/Shader/bullet.gdshader" id="2_dvrdc"]
-[ext_resource type="Texture2D" uid="uid://b545edo0xkq2q" path="res://Entities/Shoot/Assets/Spirtes/11.png" id="3_nax38"]
+[ext_resource type="Texture2D" uid="uid://b545edo0xkq2q" path="res://Entities/Shoot/Assets/sprites/11.png" id="3_nax38"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etkej"]
 shader = ExtResource("2_dvrdc")
