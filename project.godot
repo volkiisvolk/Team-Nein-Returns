@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="TeamNineReturns"
+run/main_scene="res://Stages/MainGame/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Global/Global.gd"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
