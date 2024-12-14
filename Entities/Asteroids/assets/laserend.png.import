@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxvgxmccokck6"
-path="res://.godot/imported/06.png-4df14ca7b410e6523b3f808b17f480dc.ctex"
+uid="uid://d0f3o4vh37syh"
+path="res://.godot/imported/laserend.png-2b6f7ec57a6162c5d1e76b5811f4165c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Shoot/Assets/Spirtes/06.png"
-dest_files=["res://.godot/imported/06.png-4df14ca7b410e6523b3f808b17f480dc.ctex"]
+source_file="res://Entities/Asteroids/assets/laserend.png"
+dest_files=["res://.godot/imported/laserend.png-2b6f7ec57a6162c5d1e76b5811f4165c.ctex"]
 
 [params]
 

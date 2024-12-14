@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyto2ctwuka4t"
-path="res://.godot/imported/01.png-e23957e8df0052dd0ba0f80545210ee0.ctex"
+uid="uid://c57xnliapjver"
+path="res://.godot/imported/lasermiddle.png-ac153827962665e86cbf5f6315d69934.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Shoot/Assets/Spirtes/01.png"
-dest_files=["res://.godot/imported/01.png-e23957e8df0052dd0ba0f80545210ee0.ctex"]
+source_file="res://Entities/Asteroids/assets/lasermiddle.png"
+dest_files=["res://.godot/imported/lasermiddle.png-ac153827962665e86cbf5f6315d69934.ctex"]
 
 [params]
 
