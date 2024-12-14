@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://blwn251o6n0jr"]
+[gd_scene load_steps=3 format=3 uid="uid://blwn251o6n0jr"]
+
+[ext_resource type="Script" path="res://Stages/World/background.gd" id="1_8316s"]
+[ext_resource type="Script" path="res://Stages/World/asteroid_spawner.gd" id="2_7s4qs"]
 
 [node name="World" type="Node"]
+
+[node name="Background" type="ParallaxBackground" parent="."]
+script = ExtResource("1_8316s")
+
+[node name="Stars" type="ParallaxLayer" parent="Background"]
+
+[node name="AsteroidSpawner" type="Node2D" parent="."]
+script = ExtResource("2_7s4qs")

@@ -1,11 +1,15 @@
 extends ParallaxBackground
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	randomize()
+	_generate_starfield()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _generate_starfield():
+	var parallax_layer = get_node("Stars")
+	var star_texture = preload("res://icon.svg") # Sternenbild Textur
+	var star_count = 100 # Anzahl der Sterne
+	for i in range(star_count):
+		var star = Sprite2D.new()
+		star.texture = star_texture
+		star.position = Vector2(randi_range(-2000, 2000), randi_range(-2000, 2000))
+		parallax_layer.add_child(star)
