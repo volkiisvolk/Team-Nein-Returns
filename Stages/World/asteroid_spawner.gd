@@ -99,9 +99,15 @@ func _init_pool(size):
 		add_child(asteroid)
 
 func _get_asteroid():
+	# Schleife durch den Pool und prüfe, ob der Asteroid gültig ist
 	for asteroid in asteroid_pool:
+		if not is_instance_valid(asteroid):  # Ungültige Instanzen aus der Liste entfernen
+			asteroid_pool.erase(asteroid)
+			continue
 		if not asteroid.visible:
 			return asteroid
+
+	# Erstelle neuen Asteroiden, wenn kein gültiger gefunden wurde
 	var new_asteroid = asteroid_scene.instantiate()
 	var random_size = sizes[randi() % sizes.size()]
 	var random_color = colors[randi() % colors.size()]
@@ -110,7 +116,7 @@ func _get_asteroid():
 	new_asteroid.color = random_color
 	new_asteroid.health = size_health_mapping[random_size]
 	new_asteroid.speed = size_speed_mapping[random_size]
-		
+	
 	asteroid_pool.append(new_asteroid)
 	add_child(new_asteroid)
 	return new_asteroid

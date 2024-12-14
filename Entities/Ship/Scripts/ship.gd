@@ -48,16 +48,13 @@ func move(delta):
 # prüft tank 
 func check_fuel(delta):
 	if fuel <= 0:
-		print("Tank leer du opfer")
 		get_tree().quit() # Spiel ende
 		# Hier code für End screen oder so
 	else:
 		update_fuel_display()
-		print("Fuel remaining: %.2f" % fuel)
 
 # zeigt fuel an
 func update_fuel_display():
-	print("hea")
 	# Bestimme Anzahl der gefüllten Blocks
 	var filled_blocks = int((fuel / max_fuel) * FUEL_BLOCKS)
 	var empty_blocks = FUEL_BLOCKS - filled_blocks
