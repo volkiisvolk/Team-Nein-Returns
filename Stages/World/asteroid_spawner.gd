@@ -88,6 +88,12 @@ func _unload_chunk(chunk_key):
 func _init_pool(size):
 	for i in range(size):
 		var asteroid = asteroid_scene.instantiate()
+		var random_size = sizes[randi() % sizes.size()]
+		var random_color = colors[randi() % colors.size()]
+		asteroid.size = random_size
+		asteroid.color = random_color
+		asteroid.health = size_health_mapping[random_size]
+		asteroid.speed = size_speed_mapping[random_size]
 		asteroid.visible = false
 		asteroid_pool.append(asteroid)
 		add_child(asteroid)
