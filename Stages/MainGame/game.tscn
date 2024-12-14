@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://bj18gkibuuvjk"]
+[gd_scene load_steps=2 format=3 uid="uid://bj18gkibuuvjk"]
+
+[ext_resource type="PackedScene" uid="uid://bji84x6xrprv4" path="res://Entities/Shoot/bullet.tscn" id="1_78lbr"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Laser" parent="." instance=ExtResource("1_78lbr")]
+position = Vector2(493, 399)
