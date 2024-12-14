@@ -15,10 +15,12 @@ const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 @onready var hud = $HUD
 @onready var bullet_scene = $Laser
 
+@onready var laser = $Laser 
+
 func _ready() -> void:
 	#var viewport_size = get_viewport().get_visible_rect().size
 	#hud.position = Vector2(viewport_size.x / 2 - hud.get_child(0).get_size().x / 2, 0)
-
+	laser.set_parent_ship(self)
 	# puff puff
 	pass
 
@@ -92,8 +94,9 @@ func upgrade_damage(amount: int) -> void:
 	bullet_scene.set_damage(amount)
 
 
-
-# Logic für das Craften
+"""
+Logic für das Craften
+"""
 func reset_inventory() -> void:
 	crafting_inventory = ["null", "null"]
 
