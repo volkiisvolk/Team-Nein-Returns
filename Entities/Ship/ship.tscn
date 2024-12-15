@@ -28,9 +28,3 @@ shape = SubResource("CircleShape2D_fjgip")
 [node name="Laser" parent="." instance=ExtResource("3_wwhk2")]
 z_index = -1
 position = Vector2(-40, 0)
-
-[node name="HUD" type="Node2D" parent="."]
-
-[node name="FuelLabel" type="Label" parent="HUD"]
-offset_right = 40.0
-offset_bottom = 23.0

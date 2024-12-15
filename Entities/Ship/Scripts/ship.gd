@@ -5,11 +5,9 @@ const JUMP_VELOCITY = -400.0
 
 var fuel = 100.0 # Startwert für fuel
 var max_fuel = 100.0 # Maximale Tankfüllung
-
 var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
-const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
-
+signal damage_change(damage)
 
 var sprite_size: Dictionary = {
 	"small": 1,
@@ -25,7 +23,7 @@ signal speed_change(speed)
 @onready var fuel_label = $HUD/FuelLabel
 @onready var hud = $HUD
 @onready var bullet_scene = $Laser
-
+@onready var damage = $Laser.current_damage
 @onready var laser = $Laser 
 @onready var sprite = $Sprite # Node des Sprites (falls vorhanden)
 
@@ -103,6 +101,7 @@ func upgrade_speed(amount: float) -> void:
 # aufrufen für Damage-Verbesserung
 func upgrade_damage(amount: int) -> void:
 	bullet_scene.set_damage(amount)
+	damage_change.emit(amount)
 
 """
 Logik für das Craften
@@ -134,11 +133,11 @@ func craft_upgrades() -> void:
 			refill_fuel(20*multiplier)
 			# Leere das Inventory
 			reset_inventory()
-		else
-    
+		else:
+	
 			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
 				upgrade_tank_capacity(20*multiplier)
-        fuel_change.emit(fuel, max_fuel)
+				fuel_change.emit(fuel, max_fuel)
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
 				upgrade_speed(20*multiplier)
@@ -146,4 +145,3 @@ func craft_upgrades() -> void:
 			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
 				upgrade_damage(20*multiplier)
 				reset_inventory()
-
