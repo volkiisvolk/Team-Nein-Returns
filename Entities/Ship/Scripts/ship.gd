@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 const SPEED = 200.0 # Startwert für Speed
-# const MAX_SPEED = 1000 # Maximale erlaubte Geschwindigkeit (Tempolimit)
+const MAX_SPEED = Global.MAX_SPEED # Maximale erlaubte Geschwindigkeit (Tempolimit)
 const JUMP_VELOCITY = -400.0
+const MAX_DAMAGE = Global.MAX_DAMAGE #Maximale erlaubte Damage
 
 var fuel = 70.0 # Startwert für fuel
 var max_fuel = 100.0 # Maximale aktuelle Tankfüllung
@@ -135,8 +136,10 @@ func upgrade_speed(amount: float) -> void:
 
 # aufrufen für Damage-Verbesserung
 func upgrade_damage(amount: int) -> void:
-	bullet_scene.set_damage(amount)
-	damage_change.emit(amount)
+	if amount < MAX_DAMAGE:
+		bullet_scene.set_damage(amount)
+		damage_change.emit(amount)
+
 
 """
 Logik für das Craften
