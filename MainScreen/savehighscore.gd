@@ -15,6 +15,7 @@ func _process(delta: float) -> void:
 
 func _on_save_highscore_button_pressed() -> void:
 	Global.add_highscore(name,Global.highscore)
+	Global.save_highscores()
 	get_tree().change_scene_to_file("res://MainScreen/endscreen.tscn")
 	pass # Replace with function body.
 

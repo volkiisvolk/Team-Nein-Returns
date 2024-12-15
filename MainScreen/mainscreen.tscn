@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://MainScreen/HoverLogic/options_button.gd" id="4_l60ua"]
 [ext_resource type="Script" path="res://MainScreen/HoverLogic/quit_button.gd" id="5_8k04p"]
 [ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="7_l03mi"]
-[ext_resource type="Texture2D" uid="uid://xh8bwo5o2d57" path="res://MainScreen/assets/mainscreenplanet.png" id="8_00gtt"]
+[ext_resource type="Texture2D" uid="uid://xh8bwo5o2d57" path="res://MainScreen/Assets/mainscreenplanet.png" id="8_00gtt"]
 [ext_resource type="Texture2D" uid="uid://duvnq4lrd0ytk" path="res://Entities/Asteroids/assets/asteroidgreen.png" id="9_d7mwj"]
 
 [sub_resource type="FontVariation" id="FontVariation_mkvn4"]
