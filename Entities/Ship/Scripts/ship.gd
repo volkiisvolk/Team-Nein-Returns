@@ -8,7 +8,7 @@ const MAX_DAMAGE = Global.MAX_DAMAGE #Maximale erlaubte Damage
 var fuel = 70.0 # Startwert für fuel
 var max_fuel = 100.0 # Maximale aktuelle Tankfüllung
 const MAX_FUEL_CAP = 500 # Maximal erreichbare Tankfüllung
-
+var MAX_SPEED = 500
 var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
@@ -33,6 +33,12 @@ signal damage_change(damage)
 @onready var laser = $Laser 
 @onready var sprite = $Sprite # Node des Sprites (falls vorhanden)
 
+# Konstanten für Bewegung
+var acceleration: float = 1200.0  # Beschleunigungsrate
+var deceleration: float = 600.0   # Verzögerungsrate
+const FRICTION: float = 0.98      # Trägheitsfaktor für sanftes Abbremsen
+
+
 func _ready() -> void:
 	laser.set_parent_ship(self)
 
@@ -44,21 +50,36 @@ func _physics_process(delta: float) -> void:
 	
 func move(delta):
 	var direction = Vector2.ZERO
+
+	# Eingaben korrekt kombinieren
 	if Input.is_action_pressed("ui_right"):
-		direction += Vector2.RIGHT
+		direction.x += 1
 	if Input.is_action_pressed("ui_left"):
-		direction += Vector2.LEFT
+		direction.x -= 1
 	if Input.is_action_pressed("ui_down"):
-		direction += Vector2.DOWN
+		direction.y += 1
 	if Input.is_action_pressed("ui_up"):
-		direction += Vector2.UP
-	position += direction.normalized() * current_speed * delta
-	
-	# Wenn man sich bewegt
+		direction.y -= 1
+
+	# Richtung normalisieren
+	direction = direction.normalized()
+
+	# Bewegung mit gezielter Beschleunigung oder Bremskraft
 	if direction != Vector2.ZERO:
-		#fuel -= FUEL_CONSUMPTION_RATE * delta
-		#fuel = max(fuel, 0) # Sicherstellen, dass fuel > 0
-		pass
+		# Sanfte, gezielte Beschleunigung in die Eingaberichtung
+		velocity = velocity.lerp(direction * current_speed, 0.25)  # 0.6 = starker Richtungswechsel
+		fuel -= FUEL_CONSUMPTION_RATE * delta
+		fuel = max(fuel, 0)
+	else:
+		# Schnellere Verzögerung bei Loslassen der Eingaben
+		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta * 1.5)
+
+	# Geschwindigkeit begrenzen auf `current_speed`
+	velocity = velocity.limit_length(current_speed)
+
+	# Bewegung anwenden
+	move_and_slide()
+
 
 # Smooth Rotation zur Mausposition
 func update_rotation(delta: float) -> void:
@@ -108,6 +129,8 @@ func upgrade_tank_capacity(amount: float) -> void:
 func upgrade_speed(amount: float) -> void:
 	if current_speed < MAX_SPEED:
 		current_speed += amount
+		if current_speed > 500:
+			current_speed = 500
 		speed_change.emit(current_speed)
 		print("current_speed: %.2f" % current_speed)
 
@@ -160,7 +183,7 @@ func craft_upgrades() -> void:
 				inventory_change.emit("", "tank")
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
-				upgrade_speed(5*multiplier)
+				upgrade_speed(2*multiplier)
 				inventory_change.emit("", "speed")
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
