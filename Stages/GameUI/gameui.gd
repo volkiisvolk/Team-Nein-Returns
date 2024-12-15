@@ -2,11 +2,11 @@ extends CanvasLayer
 
 @onready var fuel_label = $VBoxContainer/FuelSprite/FuelLabel
 @onready var speed_label = $VBoxContainer/Speed
-@onready var damage_label = $VBoxContainer/Firepower
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,7 +34,3 @@ func update_fuel_display(fuel: Variant, max_fuel: Variant):
 func _on_ship_speed_change(speed: Variant) -> void:
 	speed_label.text = "speed upgrade: " + str(speed)
 	
-
-func _on_ship_damage_change(damage: Variant) -> void:
-	damage_label.text = "firepower upgrade: " + str(damage)
-
