@@ -117,7 +117,9 @@ func add_drop_to_inventory(color: String, size: String) -> void:
 		crafting_inventory[1] = color
 		craft_upgrades(color, size)
 	
-func on_drop_collected():
+func on_drop_collected(color: String, size: String):
+	#print(color + size)
+	#TODO hier mit den Dings umgehen
 	pass
 	
 	
