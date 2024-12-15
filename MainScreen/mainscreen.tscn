@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://MainScreen/HoverLogic/options_button.gd" id="4_l60ua"]
 [ext_resource type="Script" path="res://MainScreen/HoverLogic/quit_button.gd" id="5_8k04p"]
 [ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="7_l03mi"]
-[ext_resource type="Texture2D" uid="uid://xh8bwo5o2d57" path="res://MainScreen/assets/mainscreenplanet.png" id="8_00gtt"]
+[ext_resource type="Texture2D" uid="uid://xh8bwo5o2d57" path="res://MainScreen/Assets/mainscreenplanet.png" id="8_00gtt"]
 [ext_resource type="Texture2D" uid="uid://duvnq4lrd0ytk" path="res://Entities/Asteroids/assets/asteroidgreen.png" id="9_d7mwj"]
 
 [sub_resource type="FontVariation" id="FontVariation_mkvn4"]
@@ -201,6 +201,14 @@ text = "Options
 flat = true
 script = ExtResource("4_l60ua")
 
+[node name="HighscoreButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4n2mf")
+theme_override_font_sizes/font_size = 50
+text = "Highscores"
+flat = true
+script = ExtResource("4_l60ua")
+
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_4n2mf")
@@ -268,6 +276,9 @@ texture = ExtResource("8_00gtt")
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/OptionsButton" to="CenterContainer/VBoxContainer/OptionsButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/OptionsButton" to="CenterContainer/VBoxContainer/OptionsButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/HighscoreButton" to="CenterContainer/VBoxContainer/HighscoreButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/HighscoreButton" to="CenterContainer/VBoxContainer/HighscoreButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HighscoreButton" to="." method="_on_highscore_button_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/QuitButton" to="CenterContainer/VBoxContainer/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/QuitButton" to="CenterContainer/VBoxContainer/QuitButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

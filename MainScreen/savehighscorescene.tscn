@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlq63y7sjdb8s"]
+[gd_scene load_steps=5 format=3 uid="uid://cdpdx05q15fpl"]
 
-[ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="1_ba6xd"]
-[ext_resource type="Script" path="res://MainScreen/endscreen.gd" id="1_j44mt"]
-[ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="2_gospl"]
+[ext_resource type="Script" path="res://MainScreen/savehighscore.gd" id="1_bgyba"]
+[ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="2_qqtju"]
+[ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="3_6osl0"]
 
 [sub_resource type="FontVariation" id="FontVariation_sdg1i"]
-base_font = ExtResource("2_gospl")
+base_font = ExtResource("3_6osl0")
 
-[node name="Control" type="Control"]
+[node name="savehighscorescene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,10 +21,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
-script = ExtResource("1_j44mt")
+script = ExtResource("1_bgyba")
 
 [node name="Background" type="TextureRect" parent="."]
-visible = false
 texture_repeat = 2
 layout_mode = 1
 anchors_preset = 15
@@ -36,7 +35,7 @@ offset_right = 1.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ba6xd")
+texture = ExtResource("2_qqtju")
 expand_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -73,19 +72,24 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="TextEdit" type="LineEdit" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gospl")
+placeholder_text = "Write Your Name"
+
+[node name="SaveHighscoreButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_6osl0")
 theme_override_font_sizes/font_size = 50
-text = "Back to Menu"
+text = "Save Highscore"
 flat = true
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="Nahhh" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gospl")
+theme_override_fonts/font = ExtResource("3_6osl0")
 theme_override_font_sizes/font_size = 50
-text = "Quit"
+text = "Nahhh"
 flat = true
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="text_changed" from="CenterContainer/VBoxContainer/VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/SaveHighscoreButton" to="." method="_on_save_highscore_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/Nahhh" to="." method="_on_nahhh_pressed"]

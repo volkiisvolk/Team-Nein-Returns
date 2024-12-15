@@ -19,3 +19,8 @@ func _on_options_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit() 
+
+
+func _on_highscore_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://User/highscoretabel.tscn")
+	pass # Replace with function body.
