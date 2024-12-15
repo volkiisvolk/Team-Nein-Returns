@@ -9,7 +9,7 @@ script/source = "extends Area2D
 	
 func _on_body_entered(body):
 	if body.name == \"Ship\":
-		body.on_drop_collected($\"..\".color,$\"..\".size)
+		body.add_drop_to_inventory($\"..\".color,$\"..\".size)
 		$\"..\".call_deferred_thread_group(\"queue_free\")
 "
 
