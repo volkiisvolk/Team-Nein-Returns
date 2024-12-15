@@ -325,3 +325,4 @@ pyrightconfig.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/godot,python,visualstudiocode,pycharm
+User/highscores.json
