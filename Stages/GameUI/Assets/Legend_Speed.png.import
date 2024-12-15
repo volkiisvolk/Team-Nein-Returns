@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://muhann3181qw"
-path="res://.godot/imported/Purpleicon.png-5b1e5e6a1b7b061abd9ecc992999dc46.ctex"
+uid="uid://d4frxojbgvga5"
+path="res://.godot/imported/Legend_Speed.png-debe7501a9687117284a7687bdca3c06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Stages/GameUI/Assets/Purpleicon.png"
-dest_files=["res://.godot/imported/Purpleicon.png-5b1e5e6a1b7b061abd9ecc992999dc46.ctex"]
+source_file="res://Stages/GameUI/Assets/Legend_Speed.png"
+dest_files=["res://.godot/imported/Legend_Speed.png-debe7501a9687117284a7687bdca3c06.ctex"]
 
 [params]
 

@@ -17,6 +17,7 @@ var sprite_size: Dictionary = {
 	"large": 7
 }
 
+signal inventory_change(color, craft)
 signal fuel_change(fuel_new, fuel_max)
 signal speed_change(speed)
 signal damage_change(damage)
@@ -118,10 +119,12 @@ func add_drop_to_inventory(color: String, size: String) -> void:
 	if crafting_inventory[0] == "null":
 		crafting_inventory[0] = color
 		size_inventory[0] = size
+		inventory_change.emit(color, "")
 	elif (crafting_inventory[1] == "null"):
 		crafting_inventory[1] = color
 		size_inventory[1] = size
 		craft_upgrades()
+	
 	
 func craft_upgrades() -> void:
 	var multiplier = sprite_size[size_inventory[0]] * sprite_size[size_inventory[1]]
@@ -133,16 +136,20 @@ func craft_upgrades() -> void:
 			print("Fuel ADD")
 			# TODO der Wert muss der Funktion übergeben werden
 			refill_fuel(20*multiplier)
+			inventory_change.emit("", "fuel")
 			# Leere das Inventory
 			reset_inventory()
 		else:
 			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
 				upgrade_tank_capacity(20*multiplier)
-				reset_inventory()
 				fuel_change.emit(fuel, max_fuel)
+				inventory_change.emit("", "tank")
+				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
 				upgrade_speed(20*multiplier)
+				inventory_change.emit("", "speed")
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
 				upgrade_damage(20*multiplier)
+				inventory_change.emit("", "damage")
 				reset_inventory()

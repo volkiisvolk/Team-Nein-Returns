@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var fuel_label = $VBoxContainer/FuelSprite/FuelLabel
+@onready var fuel_label = $FuelSprite/FuelLabel
 @onready var speed_label = $VBoxContainer/Speed
 @onready var damage_label = $VBoxContainer/Firepower
 
@@ -38,3 +38,29 @@ func _on_ship_speed_change(speed: Variant) -> void:
 
 func _on_ship_damage_change(damage: Variant) -> void:
 	damage_label.text = "firepower upgrade: " + str(damage)
+
+
+func _on_ship_inventory_change(color: Variant, craft: Variant) -> void:
+	if(color == "purple"):
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/Craftingpurple.png")
+	elif(color == "green"):
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/Craftinggreen.png")
+	elif(color == "red"):
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/Craftingred.png")
+	elif(craft == "tank"):
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/Legend_Tank.png")
+		await get_tree().create_timer(2).timeout
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/legend.png")
+	elif(craft == "speed"):
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/Legend_Speed.png")
+		await get_tree().create_timer(2).timeout
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/legend.png")
+	elif(craft == "damage"):
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/Legend_Laser.png")
+		await get_tree().create_timer(2).timeout
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/legend.png")
+	elif(craft == "fuel"):
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/Legend_Fuel.png")
+		await get_tree().create_timer(2).timeout
+		$VBoxContainer/LegendSprite.texture = ResourceLoader.load("res://Stages/GameUI/Assets/legend.png")
+	
