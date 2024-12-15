@@ -19,13 +19,13 @@ var sprite_size: Dictionary = {
 
 signal fuel_change(fuel_new, fuel_max)
 signal speed_change(speed)
+signal damage_change(damage)
 
 @onready var crafting_inventory: Array[String] = ["null", "null"] # crafting inventory
 @onready var size_inventory: Array[String] = ["null", "null"] # crafting inventory
 @onready var fuel_label = $HUD/FuelLabel
 @onready var hud = $HUD
 @onready var bullet_scene = $Laser
-
 @onready var laser = $Laser 
 @onready var sprite = $Sprite # Node des Sprites (falls vorhanden)
 
@@ -103,6 +103,7 @@ func upgrade_speed(amount: float) -> void:
 # aufrufen für Damage-Verbesserung
 func upgrade_damage(amount: int) -> void:
 	bullet_scene.set_damage(amount)
+	damage_change.emit(amount)
 
 """
 Logik für das Craften

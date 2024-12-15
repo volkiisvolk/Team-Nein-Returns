@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var fuel_label = $VBoxContainer/FuelSprite/FuelLabel
 @onready var speed_label = $VBoxContainer/Speed
+@onready var damage_label = $VBoxContainer/Firepower
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,4 +38,3 @@ func _on_ship_speed_change(speed: Variant) -> void:
 
 func _on_ship_damage_change(damage: Variant) -> void:
 	damage_label.text = "firepower upgrade: " + str(damage)
-
