@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1kxmookcmtmu"
-path="res://.godot/imported/Redicon.png-dd2b13063f558c5f649c7d2dfb30a794.ctex"
+uid="uid://b82at2j4qqblt"
+path="res://.godot/imported/Legend_Laser.png-fc9fff87b428b37cf01cafdb2fad2c68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Stages/GameUI/Assets/Redicon.png"
-dest_files=["res://.godot/imported/Redicon.png-dd2b13063f558c5f649c7d2dfb30a794.ctex"]
+source_file="res://Stages/GameUI/Assets/Legend_Laser.png"
+dest_files=["res://.godot/imported/Legend_Laser.png-fc9fff87b428b37cf01cafdb2fad2c68.ctex"]
 
 [params]
 

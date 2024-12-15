@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuc2w76eajdf4"
-path="res://.godot/imported/Greenicon.png-d7196e9be2535c43faa503217c221d44.ctex"
+uid="uid://ql5fmq0o12kn"
+path="res://.godot/imported/Craftingred.png-122266c74ca9af9ad206eef1738400ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Stages/GameUI/Assets/Greenicon.png"
-dest_files=["res://.godot/imported/Greenicon.png-d7196e9be2535c43faa503217c221d44.ctex"]
+source_file="res://Stages/GameUI/Assets/Craftingred.png"
+dest_files=["res://.godot/imported/Craftingred.png-122266c74ca9af9ad206eef1738400ce.ctex"]
 
 [params]
 
