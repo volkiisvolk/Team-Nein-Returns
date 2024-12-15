@@ -100,6 +100,7 @@ var image_data: Dictionary = {
 }
 
 @export var drop_scene: PackedScene
+@export var spawnprotected = true  # Schutzflag zu Beginn aktiv
 
 func _ready():
 	# Initialisiere Lebenspunkte basierend auf der Größe
@@ -112,6 +113,9 @@ func _ready():
 		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
 	adjust_collision_shape()
+	await get_tree().create_timer(1.0).timeout  # 2 Sekunden Schutzzeit
+	spawnprotected = false
+	print("Asteroid ist jetzt nicht mehr geschützt.")
 	
 func adjust_stats():
 	$Sprite2D.texture = get_image(size,color)
@@ -213,20 +217,21 @@ func destroy():
 	"""
 	if $CollisionShape2D:
 		$CollisionShape2D.disabled = true
-	match size:
-		"small": 
-			Global.update_highscore(smallValue)
-		"medium": 
-			Global.update_highscore(mediumValue)
-		"large" :
-			Global.update_highscore(largeValue)
-	if drop_scene:
-		var drop_instance = drop_scene.instantiate()
-		drop_instance.size = size
-		drop_instance.color = color
-		drop_instance.position = position
-		get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
-	call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
+	if not spawnprotected:
+		match size:
+			"small": 
+				Global.update_highscore(smallValue)
+			"medium": 
+				Global.update_highscore(mediumValue)
+			"large" :
+				Global.update_highscore(largeValue)
+		if drop_scene:
+			var drop_instance = drop_scene.instantiate()
+			drop_instance.size = size
+			drop_instance.color = color
+			drop_instance.position = position
+			get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
+		call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
 	
 func random_color() -> String:
 	var colors = ["red", "blue", "green"]
@@ -238,6 +243,9 @@ func random_size() -> String:
 
 
 func _on_area_2d_body_entered(body) -> void:
+	if spawnprotected:
+		print("Kollision ignoriert: Asteroid ist noch geschützt.")
+		return
 	if body.name == "Ship":
 		on_collision_with_ship(body)
 

@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/godot,python,visualstudiocode,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=godot,python,visualstudiocode,pycharm
 
+.highscores.json
 ### Godot ###
 # Godot 4+ specific ignores
 .godot/
@@ -324,3 +325,4 @@ pyrightconfig.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/godot,python,visualstudiocode,pycharm
+User/highscores.json
