@@ -5,11 +5,11 @@ const MAX_SPEED = Global.MAX_SPEED # Maximale erlaubte Geschwindigkeit (Tempolim
 const JUMP_VELOCITY = -400.0
 const MAX_DAMAGE = Global.MAX_DAMAGE #Maximale erlaubte Damage
 
-var fuel = 70.0 # Startwert für fuel
+var fuel = 100.0 # Startwert für fuel
 var max_fuel = 100.0 # Maximale aktuelle Tankfüllung
 const MAX_FUEL_CAP = 500 # Maximal erreichbare Tankfüllung
 var current_speed = SPEED # Aktuelle Geschwindigkeit
-const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
+const FUEL_CONSUMPTION_RATE = 2.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
 
@@ -135,9 +135,11 @@ func upgrade_speed(amount: float) -> void:
 
 # aufrufen für Damage-Verbesserung
 func upgrade_damage(amount: int) -> void:
+	print("amount " + str(amount))
 	if amount < MAX_DAMAGE:
 		bullet_scene.set_damage(amount)
-		damage_change.emit(amount)
+		var damage = bullet_scene.get_damage()
+		damage_change.emit(damage)
 
 
 """
@@ -184,6 +186,6 @@ func craft_upgrades() -> void:
 				inventory_change.emit("", "speed")
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
-				upgrade_damage(0.5*multiplier)
+				upgrade_damage(1*multiplier)
 				inventory_change.emit("", "damage")
 				reset_inventory()
