@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwt5jx5ulbrof"]
+
+[ext_resource type="AudioStream" uid="uid://mjar4uwiw3xv" path="res://MainScreen/Sound/Effects/Tod.mp3" id="1_lq4r1"]
+
+[node name="Effects" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Tod" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_lq4r1")

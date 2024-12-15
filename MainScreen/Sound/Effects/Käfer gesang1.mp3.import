@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhsh1a6wbq1sg"
+path="res://.godot/imported/Käfer gesang1.mp3-410c0e1fe6400435c50bea601d9a2320.mp3str"
+
+[deps]
+
+source_file="res://MainScreen/Sound/Effects/Käfer gesang1.mp3"
+dest_files=["res://.godot/imported/Käfer gesang1.mp3-410c0e1fe6400435c50bea601d9a2320.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

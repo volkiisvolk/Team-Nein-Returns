@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://deuc4p2antf71"]
+
+[ext_resource type="Script" path="res://MainScreen/pause.gd" id="1_7prlh"]
+[ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="2_lh7s2"]
+[ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="3_bvngp"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/continue_button.gd" id="4_wcg0o"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/back_to_menu.gd" id="5_esbwj"]
+[ext_resource type="Script" path="res://MainScreen/HoverLogic/quit_button.gd" id="6_6t5it"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7prlh")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_right = 768.0
+offset_bottom = 437.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lh7s2")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.5
+offset_top = -61.0
+offset_right = 174.5
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 110
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bvngp")
+theme_override_font_sizes/font_size = 50
+text = "Continue
+"
+flat = true
+script = ExtResource("4_wcg0o")
+
+[node name="Back to Menu" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bvngp")
+theme_override_font_sizes/font_size = 50
+text = "Back to Menu
+"
+flat = true
+script = ExtResource("5_esbwj")
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bvngp")
+theme_override_font_sizes/font_size = 50
+text = "Quit
+"
+flat = true
+script = ExtResource("6_6t5it")
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/ContinueButton" to="CenterContainer/VBoxContainer/ContinueButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/ContinueButton" to="CenterContainer/VBoxContainer/ContinueButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueButton" to="CenterContainer/VBoxContainer/ContinueButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Back to Menu" to="CenterContainer/VBoxContainer/Back to Menu" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Back to Menu" to="CenterContainer/VBoxContainer/Back to Menu" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Back to Menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Quit" to="CenterContainer/VBoxContainer/Quit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Quit" to="CenterContainer/VBoxContainer/Quit" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

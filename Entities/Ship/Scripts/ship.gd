@@ -12,7 +12,6 @@ var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
-
 var sprite_size: Dictionary = {
 	"small": 1,
 	"medium": 3,
@@ -32,8 +31,13 @@ signal damage_change(damage)
 @onready var laser = $Laser 
 @onready var sprite = $Sprite # Node des Sprites (falls vorhanden)
 
+#Sound effects
+@onready var effects_scene = preload("res://MainScreen/Sound/Effects/Effects.tscn").instantiate()
+@onready var tod_sound = effects_scene.get_node("Tod")
+
 func _ready() -> void:
 	laser.set_parent_ship(self)
+	add_child(effects_scene)
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
@@ -45,6 +49,7 @@ func move(delta):
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
 		direction += Vector2.RIGHT
+		tod_sound.play()
 	if Input.is_action_pressed("ui_left"):
 		direction += Vector2.LEFT
 	if Input.is_action_pressed("ui_down"):
@@ -75,6 +80,7 @@ func update_rotation(delta: float) -> void:
 # prüft Tank
 func check_fuel(delta):
 	if fuel <= 0:
+		$AudioStreamPlayer2D.play()
 		get_tree().change_scene_to_file("res://MainScreen/savehighscorescene.tscn")
 		# Hier Code für Endscreen oder so
 	else:
