@@ -49,7 +49,7 @@ func _ready():
 		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
 	adjust_collision_shape()
-	await get_tree().create_timer(2.0).timeout  # 2 Sekunden Schutzzeit
+	await get_tree().create_timer(1.0).timeout  # 2 Sekunden Schutzzeit
 	spawnprotected = false
 	print("Asteroid ist jetzt nicht mehr geschützt.")
 	

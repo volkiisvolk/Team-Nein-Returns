@@ -67,8 +67,8 @@ func move(delta):
 	if direction != Vector2.ZERO:
 		# Sanfte, gezielte Beschleunigung in die Eingaberichtung
 		velocity = velocity.lerp(direction * current_speed, 0.25)  # 0.6 = starker Richtungswechsel
-		#fuel -= FUEL_CONSUMPTION_RATE * delta
-		#fuel = max(fuel, 0)
+		fuel -= FUEL_CONSUMPTION_RATE * delta
+		fuel = max(fuel, 0)
 	else:
 		# Schnellere Verzögerung bei Loslassen der Eingaben
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta * 1.5)
