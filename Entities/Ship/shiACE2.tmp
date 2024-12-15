@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2q384qq8ce6s"]
+
+[ext_resource type="Script" path="res://Entities/Ship/Scripts/ship.gd" id="1_5s1d4"]
+[ext_resource type="Texture2D" uid="uid://cnjcfx0l0tr4f" path="res://Entities/Ship/Assets/Sprites/playersprite.png" id="2_8nx3m"]
+[ext_resource type="PackedScene" uid="uid://bji84x6xrprv4" path="res://Entities/Shoot/bullet.tscn" id="3_wwhk2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kk8n6"]
+radius = 30.0
+height = 118.0
+
+[node name="Ship" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_5s1d4")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -0.00012207)
+scale = Vector2(0.0743652, 0.0743652)
+texture = ExtResource("2_8nx3m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_kk8n6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Laser" parent="." instance=ExtResource("3_wwhk2")]
+z_index = -1
+position = Vector2(-40, 0)
+
+[node name="HUD" type="Node2D" parent="."]
+
+[node name="FuelLabel" type="Label" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 23.0
