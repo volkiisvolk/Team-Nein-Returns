@@ -89,6 +89,10 @@ func refill_fuel(amount: float) -> void:
 	fuel = min(fuel, max_fuel) 
 	fuel_change.emit(fuel, max_fuel)
 
+# Halbiert die Tankfüllung
+func half_fuel() -> void:
+	fuel = fuel / 2
+
 # aufrufen für Tank-Upgrade
 func upgrade_tank_capacity(amount: float) -> void:
 	if max_fuel < MAX_FUEL_CAP:

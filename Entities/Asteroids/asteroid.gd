@@ -115,7 +115,7 @@ func _on_area_2d_body_entered(body) -> void:
 #Reduziert den Fuel des Schiffs bei einer Kollision.
 func on_collision_with_ship(ship):
 	if ship and ship.has_method("refill_fuel"):
-		ship.refill_fuel(-1)  # Reduziert den Tank
+		ship.half_fuel()  # Halbiert den Tank
 		print("Ship fuel reduced due to asteroid collision!")
 		destroy()
 
