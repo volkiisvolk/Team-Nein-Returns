@@ -1,18 +1,18 @@
 [
 	{
-		"name": "Volkii",
-		"score": 40
-	},
-	{
-		"name": "Player3",
-		"score": 500
+		"name": "Player2",
+		"score": 600
 	},
 	{
 		"name": "Volki",
 		"score": 150
 	},
 	{
-		"name": "Player2",
-		"score": 600
+		"name": "Player3",
+		"score": 500
+	},
+	{
+		"name": "Volkii",
+		"score": 40
 	}
 ]

@@ -64,6 +64,14 @@ text = "Options
 flat = true
 script = ExtResource("4_l60ua")
 
+[node name="HighscoreButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4n2mf")
+theme_override_font_sizes/font_size = 50
+text = "Highscores"
+flat = true
+script = ExtResource("4_l60ua")
+
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_4n2mf")
@@ -100,6 +108,9 @@ text = "Raumschiff
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/OptionsButton" to="CenterContainer/VBoxContainer/OptionsButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/OptionsButton" to="CenterContainer/VBoxContainer/OptionsButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/HighscoreButton" to="CenterContainer/VBoxContainer/HighscoreButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/HighscoreButton" to="CenterContainer/VBoxContainer/HighscoreButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HighscoreButton" to="." method="_on_highscore_button_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/QuitButton" to="CenterContainer/VBoxContainer/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/QuitButton" to="CenterContainer/VBoxContainer/QuitButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
