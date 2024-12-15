@@ -10,11 +10,15 @@ var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
+
 var sprite_size: Dictionary = {
 	"small": 1,
 	"medium": 3,
 	"large": 7
 }
+
+signal fuel_change(fuel_new, fuel_max)
+signal speed_change(speed)
 
 @onready var crafting_inventory: Array[String] = ["null", "null"] # crafting inventory
 @onready var size_inventory: Array[String] = ["null", "null"] # crafting inventory
@@ -71,19 +75,9 @@ func check_fuel(delta):
 		get_tree().change_scene_to_file("res://MainScreen/endscreen.tscn")
 		# Hier Code für Endscreen oder so
 	else:
-		update_fuel_display()
+		#notify ui screen that fuel changed
+		fuel_change.emit(fuel, max_fuel)
 
-# zeigt fuel an
-func update_fuel_display():
-	# Bestimme Anzahl der gefüllten Blocks
-	var total_blocks = int(max_fuel / 10) # 1 Block pro 10 fuel im Tank
-	var filled_blocks = int((fuel / max_fuel) * total_blocks)
-	var empty_blocks = total_blocks - filled_blocks
-	
-	# Erstelle Anzeige 
-	var fuel_bar = " █".repeat(filled_blocks) + " ░".repeat(empty_blocks)
-	# Aktualisiere Label
-	fuel_label.text = fuel_bar
 
 # ruf das von außen auf
 func refill_fuel(amount: float) -> void:
@@ -91,18 +85,19 @@ func refill_fuel(amount: float) -> void:
 	fuel += amount
 	# Sicherstellen, dass der Tank nicht über das Maximum geht
 	fuel = min(fuel, max_fuel) 
-	update_fuel_display()
+	fuel_change.emit(fuel, max_fuel)
 
 # aufrufen für Tank-Upgrade
 func upgrade_tank_capacity(amount: float) -> void:
 	max_fuel += amount
 	fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
-	update_fuel_display()
+	fuel_change.emit(fuel, max_fuel)
 	print("Tankkapazität erhöht auf  %.2f" % max_fuel)
 
 # aufrufen für Speed-Upgrade
 func upgrade_speed(amount: float) -> void:
 	current_speed += amount
+	speed_change.emit(current_speed)
 	print("current_speed: %.2f" % current_speed)
 
 # aufrufen für Damage-Verbesserung
@@ -139,9 +134,11 @@ func craft_upgrades() -> void:
 			refill_fuel(20*multiplier)
 			# Leere das Inventory
 			reset_inventory()
-		else:
+		else
+    
 			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
 				upgrade_tank_capacity(20*multiplier)
+        fuel_change.emit(fuel, max_fuel)
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
 				upgrade_speed(20*multiplier)
