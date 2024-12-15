@@ -12,6 +12,7 @@ func _process(delta: float) -> void:
 
 
 func _on_back_button_pressed() -> void:
+	Global.highscore = 0
 	get_tree().change_scene_to_file("res://MainScreen/mainscreen.tscn")
 
 
