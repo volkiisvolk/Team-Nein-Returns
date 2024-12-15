@@ -31,19 +31,9 @@ signal damage_change(damage)
 @onready var laser = $Laser 
 @onready var sprite = $Sprite # Node des Sprites (falls vorhanden)
 
-#Sound effects
-@onready var effects_scene = preload("res://MainScreen/Sound/Effects/Effects.tscn").instantiate()
-
-@onready var tod_sound = effects_scene.get_node("Tod")
-@onready var shotpower_upgrade = effects_scene.get_node("Shotpower_upgrade")
-@onready var speed_upgrade = effects_scene.get_node("Speed_upgrade")
-@onready var tank_upgrade = effects_scene.get_node("Tank_upgrade")
-@onready var fuel_filled = effects_scene.get_node("Fuel")
-
 
 func _ready() -> void:
 	laser.set_parent_ship(self)
-	add_child(effects_scene)
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
@@ -85,7 +75,7 @@ func update_rotation(delta: float) -> void:
 # prüft Tank
 func check_fuel(delta):
 	if fuel <= 0:
-		tod_sound.play()
+		Effects.death()
 		get_tree().change_scene_to_file("res://MainScreen/savehighscorescene.tscn")
 		# Hier Code für Endscreen oder so
 	else:
@@ -100,7 +90,7 @@ func refill_fuel(amount: float) -> void:
 	# Sicherstellen, dass der Tank nicht über das Maximum geht
 	fuel = min(fuel, max_fuel) 
 	fuel_change.emit(fuel, max_fuel)
-	fuel_filled.play() # sound effect
+	Effects.fuel() # sound effect
 
 # Halbiert die Tankfüllung
 func half_fuel() -> void:
@@ -109,7 +99,7 @@ func half_fuel() -> void:
 # aufrufen für Tank-Upgrade
 func upgrade_tank_capacity(amount: float) -> void:
 	if max_fuel < MAX_FUEL_CAP:
-		tank_upgrade.play() # sound effect
+		Effects.tank_upgrade() # sound effect
 		max_fuel += amount
 		fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
 		fuel_change.emit(fuel, max_fuel)
@@ -118,14 +108,14 @@ func upgrade_tank_capacity(amount: float) -> void:
 # aufrufen für Speed-Upgrade
 func upgrade_speed(amount: float) -> void:
 	if current_speed < MAX_SPEED:
-		speed_upgrade.play() #sound effect
+		Effects.speed_upgrade() #sound effect
 		current_speed += amount
 		speed_change.emit(current_speed)
 		print("current_speed: %.2f" % current_speed)
 
 # aufrufen für Damage-Verbesserung
 func upgrade_damage(amount: int) -> void:
-	shotpower_upgrade.play() # sound effect
+	Effects.damage_upgrade() # sound effect
 	bullet_scene.set_damage(amount)
 	damage_change.emit(amount)
 

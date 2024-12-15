@@ -12,11 +12,13 @@ func _process(delta: float) -> void:
 
 
 func _on_back_button_pressed() -> void:
+	Effects.button_click()
 	Global.add_highscore("Volkii",Global.highscore)
 	get_tree().change_scene_to_file("res://MainScreen/mainscreen.tscn")
 	
 
 
 func _on_quit_button_pressed() -> void:
+	Effects.button_click()
 	Global.add_highscore("Volkii",Global.highscore)
 	get_tree().quit()
