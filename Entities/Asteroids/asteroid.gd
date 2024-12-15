@@ -116,7 +116,7 @@ func _on_area_2d_body_entered(body) -> void:
 func on_collision_with_ship(ship):
 	if ship and ship.has_method("refill_fuel"):
 		ship.half_fuel()  # Halbiert den Tank
-		print("Ship fuel reduced due to asteroid collision!")
+		print("Ship fuel halfed due to asteroid collision!")
 		destroy()
 
 # passt die collision_shape der Asteroiden an die Größe der Sprites an

@@ -15,14 +15,14 @@ var sizes = ["small", "medium", "large"]
 var colors = ["red", "purple", "green"]
 # Lebenspunkte basierend auf der Größe
 var size_speed_mapping: Dictionary = {
-	"small": 50,
-	"medium": 40,
-	"large": 10
+	"small": 300,
+	"medium": 50,
+	"large": 20
 }
 var size_health_mapping: Dictionary = {
-	"small": 50,
-	"medium": 250,
-	"large": 1000
+	"small": 100,
+	"medium": 500,
+	"large": 2000
 }
 
 func _ready():
@@ -72,7 +72,7 @@ func _load_chunk(chunk_key):
 		return
 	active_chunks[chunk_key] = []
 	# Spawn einzelner oder clusterweise Asteroiden
-	for i in range(randi_range(1, 4)):
+	for i in range(randi_range(2, 8)):
 		var asteroid = _get_asteroid()
 		asteroid.position = chunk_position + Vector2(randi_range(0, chunk_size), randi_range(0, chunk_size))
 		asteroid.visible = true
@@ -127,9 +127,9 @@ func _get_asteroid():
 func random_size_gen() -> String:
 	# Gewichtungen der Asteroiden
 	var weights = {
-		"small": 70,  # 50% Wahrscheinlichkeit
-		"medium": 20, # 30% Wahrscheinlichkeit
-		"large": 10   # 20% Wahrscheinlichkeit
+		"small": 70,  # 70% Wahrscheinlichkeit
+		"medium": 20, # 20% Wahrscheinlichkeit
+		"large": 10   # 10% Wahrscheinlichkeit
 	}
 
 	# Gesamtgewicht berechnen
