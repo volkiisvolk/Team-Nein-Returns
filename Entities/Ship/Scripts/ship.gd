@@ -134,11 +134,10 @@ func craft_upgrades() -> void:
 			refill_fuel(20*multiplier)
 			# Leere das Inventory
 			reset_inventory()
-		else
-    
+		else:
 			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
 				upgrade_tank_capacity(20*multiplier)
-        fuel_change.emit(fuel, max_fuel)
+				fuel_change.emit(fuel, max_fuel)
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
 				upgrade_speed(20*multiplier)
@@ -146,4 +145,5 @@ func craft_upgrades() -> void:
 			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
 				upgrade_damage(20*multiplier)
 				reset_inventory()
-
+				
+		

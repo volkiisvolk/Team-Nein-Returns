@@ -32,5 +32,5 @@ func update_fuel_display(fuel: Variant, max_fuel: Variant):
 
 
 func _on_ship_speed_change(speed: Variant) -> void:
-	speed_label.text = "speed upgrade: " + speed
+	speed_label.text = "speed upgrade: " + str(speed)
 	
