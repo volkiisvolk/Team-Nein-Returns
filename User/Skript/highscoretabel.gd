@@ -1,9 +1,10 @@
 extends Node
 
 # Referenz auf den VBoxContainer
-@onready var highscore_container = $CenterContainer/VBoxContainer
-
+@onready var highscore_container = $CenterContainer/VBoxContainer/VBoxContainer3
+var dynamic_font = FontVariation.new()
 func _ready() -> void:
+	dynamic_font= load("res://MainScreen/Fonts/Squarea Regular.ttf")
 	# Aktualisiere die Highscore-Anzeige beim Start des Menüs
 	update_highscore_list()
 
@@ -13,11 +14,17 @@ func update_highscore_list() -> void:
 	var highscores = global_script.highscores
 
 	# Entferne alle bisherigen Labels im VBoxContainer
-	for child in highscore_container.get_children():
-		child.queue_free()
+	
 
 	# Erstelle ein Label für jeden Highscore
 	for entry in highscores:
 		var label = Label.new()
 		label.text = "%s: %d" % [entry["name"], entry["score"]]
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.add_theme_font_override("font",dynamic_font)
 		highscore_container.add_child(label)
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file("res://MainScreen/mainscreen.tscn")
+	pass # Replace with function body.

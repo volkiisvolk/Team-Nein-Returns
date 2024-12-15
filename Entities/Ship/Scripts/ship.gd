@@ -74,7 +74,7 @@ func update_rotation(delta: float) -> void:
 # prüft Tank
 func check_fuel(delta):
 	if fuel <= 0:
-		get_tree().change_scene_to_file("res://MainScreen/endscreen.tscn")
+		get_tree().change_scene_to_file("res://MainScreen/savehighscorescene.tscn")
 		# Hier Code für Endscreen oder so
 	else:
 		#notify ui screen that fuel changed
