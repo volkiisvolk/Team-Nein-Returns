@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 200.0 # Startwert für Speed
+const MAX_SPEED = 1000 # Maximale erlaubte Geschwindigkeit (Tempolimit)
 const JUMP_VELOCITY = -400.0
 
-var fuel = 100.0 # Startwert für fuel
-var max_fuel = 100.0 # Maximale Tankfüllung
+var fuel = 70.0 # Startwert für fuel
+var max_fuel = 100.0 # Maximale aktuelle Tankfüllung
+const MAX_FUEL_CAP = 500 # Maximal erreichbare Tankfüllung
 
 var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
@@ -87,18 +89,24 @@ func refill_fuel(amount: float) -> void:
 	fuel = min(fuel, max_fuel) 
 	fuel_change.emit(fuel, max_fuel)
 
+# Halbiert die Tankfüllung
+func half_fuel() -> void:
+	fuel = fuel / 2
+
 # aufrufen für Tank-Upgrade
 func upgrade_tank_capacity(amount: float) -> void:
-	max_fuel += amount
-	fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
-	fuel_change.emit(fuel, max_fuel)
-	print("Tankkapazität erhöht auf  %.2f" % max_fuel)
+	if max_fuel < MAX_FUEL_CAP:
+		max_fuel += amount
+		fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
+		fuel_change.emit(fuel, max_fuel)
+		print("Tankkapazität erhöht auf  %.2f" % max_fuel)
 
 # aufrufen für Speed-Upgrade
 func upgrade_speed(amount: float) -> void:
-	current_speed += amount
-	speed_change.emit(current_speed)
-	print("current_speed: %.2f" % current_speed)
+	if current_speed < MAX_SPEED:
+		current_speed += amount
+		speed_change.emit(current_speed)
+		print("current_speed: %.2f" % current_speed)
 
 # aufrufen für Damage-Verbesserung
 func upgrade_damage(amount: int) -> void:
@@ -137,12 +145,15 @@ func craft_upgrades() -> void:
 			reset_inventory()
 		else:
 			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
-				upgrade_tank_capacity(20*multiplier)
+
+				upgrade_tank_capacity(10 * multiplier)
+				fuel_change.emit(fuel, max_fuel)
+
 				reset_inventory()
 				fuel_change.emit(fuel, max_fuel)
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
-				upgrade_speed(20*multiplier)
+				upgrade_speed(5 * multiplier)
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
-				upgrade_damage(20*multiplier)
+				upgrade_damage(0.5 * multiplier)
 				reset_inventory()
