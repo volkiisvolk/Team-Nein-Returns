@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp7xqfp26x0lq"]
+
+[ext_resource type="Texture2D" path="res://MainScreen/assets/Icons/unmute.png" id="1_cos3d"]
+
+[node name="Mute" type="Node2D"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.15, 0.15)
+
+[node name="Button" type="Button" parent="CenterContainer"]
+layout_mode = 2
+icon = ExtResource("1_cos3d")
+flat = true

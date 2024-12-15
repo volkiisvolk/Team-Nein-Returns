@@ -13,8 +13,8 @@ func update_highscore_list() -> void:
 	var global_script = get_node("/root/Global")
 	var highscores = global_script.highscores
 
-	# Entferne alle bisherigen Labels im VBoxContainer
-	
+	# sortiere highscoreliste nach score
+	highscores.sort_custom(func(a, b): return a["score"] > b["score"])
 
 	# Erstelle ein Label für jeden Highscore
 	for entry in highscores:

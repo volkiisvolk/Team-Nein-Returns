@@ -64,19 +64,26 @@ func _update_chunks(current_chunk):
 
 func _load_chunk(chunk_key):
 	var chunk_position = chunk_key * chunk_size
-	# Falls der Chunk bereits existiert, nur sichtbar machen
 	if active_chunks.has(chunk_key):
 		for asteroid in active_chunks[chunk_key]:
 			if asteroid and is_instance_valid(asteroid):
 				asteroid.visible = true
 		return
 	active_chunks[chunk_key] = []
+
 	# Spawn einzelner oder clusterweise Asteroiden
 	for i in range(randi_range(2, 8)):
 		var asteroid = _get_asteroid()
-		asteroid.position = chunk_position + Vector2(randi_range(0, chunk_size), randi_range(0, chunk_size))
+		var spawn_position = chunk_position + Vector2(randi_range(0, chunk_size), randi_range(0, chunk_size))
+
+		# Prüfen, ob die Position zu nah am Spieler ist
+		while _is_position_near_player(spawn_position, 1000):  # Radius 300 anpassen
+			spawn_position = chunk_position + Vector2(randi_range(0, chunk_size), randi_range(0, chunk_size))
+		
+		asteroid.position = spawn_position
 		asteroid.visible = true
 		active_chunks[chunk_key].append(asteroid)
+
 
 func _unload_chunk(chunk_key):
 	# Verstecke Chunks, anstatt sie zu löschen
@@ -123,6 +130,11 @@ func _get_asteroid():
 	add_child(new_asteroid)
 	return new_asteroid
 
+func _is_position_near_player(position: Vector2, radius: float) -> bool:
+	if player_node == null:
+		return false
+	var player_position = player_node.global_position
+	return position.distance_to(player_position) < radius
 
 func random_size_gen() -> String:
 	# Gewichtungen der Asteroiden
@@ -153,3 +165,5 @@ func random_size_gen() -> String:
 
 	# Fallback (sollte nie erreicht werden)
 	return "small"
+	
+	

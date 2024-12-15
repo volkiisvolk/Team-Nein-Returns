@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmoa5y0ovyqva"]
+[gd_scene load_steps=7 format=3 uid="uid://dmoa5y0ovyqva"]
 
 [ext_resource type="Script" path="res://Stages/GameUI/gameui.gd" id="1_3vxjh"]
 [ext_resource type="Texture2D" uid="uid://rhbnqfcrxcwt" path="res://Stages/GameUI/Assets/legend.png" id="1_kf02d"]
 [ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="5_iid1f"]
+[ext_resource type="Texture2D" uid="uid://d1u1xu8ddd7i4" path="res://Stages/GameUI/Assets/bar_background.png" id="5_y45x4"]
 [ext_resource type="Texture2D" uid="uid://mu0xjmhmreav" path="res://Stages/GameUI/Assets/Fuelsign.png" id="6_6sfwm"]
+[ext_resource type="Texture2D" uid="uid://e4h5gjfrytrn" path="res://Stages/GameUI/Assets/bar_progress.png" id="6_keax4"]
 
 [node name="Control" type="CanvasLayer"]
 script = ExtResource("1_3vxjh")
@@ -56,14 +58,33 @@ centered = false
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Speed" type="Label" parent="VBoxContainer"]
+[node name="SpeedContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_iid1f")
-theme_override_font_sizes/font_size = 26
-text = "speed upgrade:"
 
-[node name="Firepower" type="Label" parent="VBoxContainer"]
+[node name="SpeedBar" type="TextureProgressBar" parent="VBoxContainer/SpeedContainer"]
+layout_mode = 2
+value = 1.0
+texture_under = ExtResource("5_y45x4")
+texture_progress = ExtResource("6_keax4")
+
+[node name="Speed" type="Label" parent="VBoxContainer/SpeedContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_iid1f")
 theme_override_font_sizes/font_size = 26
-text = "firepower upgrade:"
+text = "speed:"
+
+[node name="FirepowerContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FirepowerBar" type="TextureProgressBar" parent="VBoxContainer/FirepowerContainer"]
+layout_mode = 2
+max_value = 10.0
+value = 1.0
+texture_under = ExtResource("5_y45x4")
+texture_progress = ExtResource("6_keax4")
+
+[node name="Firepower" type="Label" parent="VBoxContainer/FirepowerContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_iid1f")
+theme_override_font_sizes/font_size = 26
+text = "firepower:"

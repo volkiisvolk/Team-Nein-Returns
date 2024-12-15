@@ -7,7 +7,7 @@ const FUEL_USAGE_ON_SHOOT = -0.2 # Spritverbrauch beim schießen
 var base_width = 10
 var shoot = false
 var laser_reset = false
-var current_damage = 1 # aktueller damage
+var current_damage = 3 # aktueller damage
 
 @onready var line2d    = $Line2D
 @onready var collision = $Line2D/DamageArea/CollisionShape2D
@@ -152,3 +152,6 @@ func _process(delta: float) -> void:
 
 func set_damage(amount: int) -> void:
 	current_damage += amount
+	
+func get_damage() -> int:
+	return current_damage
