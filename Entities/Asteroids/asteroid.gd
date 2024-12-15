@@ -44,6 +44,8 @@ func _ready():
 	if $Area2D:
 		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
+	adjust_collision_shape()
+	
 func adjust_stats():
 	$Sprite2D.texture = get_image(size,color)
 	$".".scale = get_size(size)
@@ -103,6 +105,18 @@ func _on_area_2d_body_entered(body) -> void:
 #Reduziert den Fuel des Schiffs bei einer Kollision.
 func on_collision_with_ship(ship):
 	if ship and ship.has_method("refill_fuel"):
-		ship.refill_fuel(-10)  # Reduziert den Tank um 10 Einheiten
+		ship.refill_fuel(-1)  # Reduziert den Tank
 		print("Ship fuel reduced due to asteroid collision!")
-		#destroy()
+		destroy()
+
+# passt die collision_shape der Asteroiden an die Größe der Sprites an
+func adjust_collision_shape():
+	if size == "small":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 250  # Kleiner Radius
+	elif size == "medium":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 200 # Mittlerer Radius
+	elif size == "large":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 160  # Großer Radius
