@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwt5jx5ulbrof"]
+[gd_scene load_steps=9 format=3 uid="uid://bwt5jx5ulbrof"]
 
 [ext_resource type="AudioStream" uid="uid://mjar4uwiw3xv" path="res://MainScreen/Sound/Effects/Tod.mp3" id="1_lq4r1"]
+[ext_resource type="AudioStream" uid="uid://4rtvbd1fel7c" path="res://MainScreen/Sound/Effects/Shotpower.mp3" id="2_3hsyg"]
+[ext_resource type="AudioStream" uid="uid://d0f3vqfa7d3vl" path="res://MainScreen/Sound/Effects/Speed.mp3" id="3_cxklh"]
+[ext_resource type="AudioStream" uid="uid://dmtpdqrfaeysg" path="res://MainScreen/Sound/Effects/Tank.mp3" id="4_7tx5b"]
+[ext_resource type="AudioStream" uid="uid://diedqx3sdc8bi" path="res://MainScreen/Sound/Effects/Meteor gr.mp3" id="5_5750v"]
+[ext_resource type="AudioStream" uid="uid://ei2tccqnjdx1" path="res://MainScreen/Sound/Effects/Meteor mid.mp3" id="6_gnayn"]
+[ext_resource type="AudioStream" uid="uid://dk8lxgsg8x072" path="res://MainScreen/Sound/Effects/Meteor kl.mp3" id="7_yp3jj"]
+[ext_resource type="AudioStream" uid="uid://cyqeglx5bp637" path="res://MainScreen/Sound/Effects/Click.mp3" id="8_lkeq6"]
 
 [node name="Effects" type="Control"]
 layout_mode = 3
@@ -8,3 +15,26 @@ anchors_preset = 0
 
 [node name="Tod" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_lq4r1")
+
+[node name="Shotpower_upgrade" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_3hsyg")
+
+[node name="Speed_upgrade" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cxklh")
+
+[node name="Tank_upgrade" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7tx5b")
+
+[node name="Asteroid_large" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5750v")
+
+[node name="Asteroid_medium" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_gnayn")
+
+[node name="Asteroid_small" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_yp3jj")
+
+[node name="Fuel" type="AudioStreamPlayer" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_lkeq6")

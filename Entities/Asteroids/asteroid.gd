@@ -9,7 +9,12 @@ var smallValue = 5
 var mediumValue = 10
 var largeValue = 15
 
+#Sound effects
+@onready var effects_scene = preload("res://MainScreen/Sound/Effects/Effects.tscn").instantiate()
 
+@onready var large_destroyed = effects_scene.get_node("Asteroid_large")
+@onready var medium_destroyed = effects_scene.get_node("Asteroid_medium")
+@onready var small_destroyed = effects_scene.get_node("Asteroid_small")
 
 var sprite_size: Dictionary = {
 	"small": 0.4,
@@ -38,8 +43,8 @@ var image_data: Dictionary = {
 @export var drop_scene: PackedScene
 
 func _ready():
+	add_child(effects_scene)
 	# Initialisiere Lebenspunkte basierend auf der Größe
-	
 	direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 	adjust_stats()
 	
@@ -48,7 +53,7 @@ func _ready():
 		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
 	adjust_collision_shape()
-	
+
 func adjust_stats():
 	$Sprite2D.texture = get_image(size,color)
 	$".".scale = get_size(size)
@@ -77,8 +82,12 @@ func take_damage(amount: int):
 	health -= amount
 	if health <= 0:
 		destroy()
+		
 
 func destroy():
+	print(large_destroyed)
+	if large_destroyed:
+		large_destroyed.play() # sound effect
 	"""
 	Zerstört den Asteroiden und erzeugt ggf. einen Drop.
 	"""
@@ -98,7 +107,8 @@ func destroy():
 		drop_instance.position = position
 		get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
 	call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
-	
+
+
 func random_color() -> String:
 	var colors = ["red", "blue", "green"]
 	return colors[randi() % colors.size()]
