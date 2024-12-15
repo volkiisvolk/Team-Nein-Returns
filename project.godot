@@ -23,6 +23,7 @@ Global="*res://Global/Global.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1077
+window/size/mode=3
 window/size/resizable=false
 
 [dotnet]
