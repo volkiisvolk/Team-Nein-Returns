@@ -21,9 +21,11 @@ stream = ExtResource("1_lq4r1")
 
 [node name="Shotpower_upgrade" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_bdeif")
+volume_db = 10.0
 
 [node name="Speed_upgrade" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_pnd8r")
+volume_db = 10.0
 
 [node name="Tank_upgrade" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_oq8p1")
