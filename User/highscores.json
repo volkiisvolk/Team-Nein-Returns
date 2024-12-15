@@ -12,20 +12,12 @@
 		"score": 150
 	},
 	{
-		"name": "Player3",
-		"score": 500
-	},
-	{
-		"name": "Volkii",
-		"score": 600
+		"name": "Jannis",
+		"score": 350
 	},
 	{
 		"name": "hey das bin ich",
 		"score": 600
-	},
-	{
-		"name": "Jannis",
-		"score": 350
 	},
 	{
 		"name": "asd",
@@ -34,9 +26,5 @@
 	{
 		"name": "Anna",
 		"score": 2000
-	},
-	{
-		"name": "savehighscorescene",
-		"score": 25
 	}
 ]
