@@ -9,8 +9,7 @@ script/source = "extends Area2D
 	
 func _on_body_entered(body):
 	if body.name == \"Ship\":
-		body.on_drop_collected()
-		print(\"Du hast ein Asteroid berrührt\")
+		body.on_drop_collected($\"..\".color,$\"..\".size)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sebab"]
