@@ -158,6 +158,7 @@ grow_vertical = 2
 script = ExtResource("1_2et5m")
 
 [node name="Background" type="TextureRect" parent="."]
+z_index = -500
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,25 +247,27 @@ libraries = {
 autoplay = "mainscreenplanet"
 
 [node name="Asteroidgreen" type="Sprite2D" parent="AnimationPlayer"]
-z_index = -1
+z_index = -5
 position = Vector2(1617, -116)
 scale = Vector2(0.439991, 0.439991)
 texture = ExtResource("9_d7mwj")
 
 [node name="Asteroidred2" type="Sprite2D" parent="AnimationPlayer"]
-z_index = -1
+z_index = -5
 position = Vector2(201, -13)
 rotation = 0.240223
 scale = Vector2(0.251916, 0.251916)
 texture = ExtResource("3_vojbu")
 
 [node name="Asteroidred" type="Sprite2D" parent="AnimationPlayer"]
+z_index = -5
 position = Vector2(1815, 1011)
 rotation = 0.229648
 scale = Vector2(0.251916, 0.251916)
 texture = ExtResource("3_vojbu")
 
 [node name="Mainscreenplanet" type="Sprite2D" parent="AnimationPlayer"]
+z_index = -5
 position = Vector2(348, 1263)
 rotation = -0.297783
 scale = Vector2(0.434845, 0.434845)
