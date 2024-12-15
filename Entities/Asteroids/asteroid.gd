@@ -5,11 +5,34 @@ extends Node2D
 @export var color: String = "purple"  # Farbe des Asteroiden
 @export var health: int = 100  # Lebenspunkte des Asteroiden
 var direction = Vector2.ZERO
+var smallValue = 5
+var mediumValue = 10
+var largeValue = 15
+
+
 
 var sprite_size: Dictionary = {
-	"small": 1,
-	"medium": 3,
-	"large": 7
+	"small": 0.4,
+	"medium": 1,
+	"large": 1.6
+}
+
+var image_data: Dictionary = {
+	"small": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	},
+	"medium": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	},
+	"large": {
+		"red": preload("res://Entities/Asteroids/assets/asteroidred.png"),
+		"green": preload("res://Entities/Asteroids/assets/asteroidgreen.png"),
+		"purple": preload("res://Entities/Asteroids/assets/asteroidpurple.png")
+	}
 }
 
 @export var drop_scene: PackedScene
@@ -20,17 +43,28 @@ func _ready():
 	direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 	adjust_stats()
 	
-func adjust_stats():
-	#TODO Verschiedene Texturen hier laden
-	var color_mapping = {"red": Color(1, 0, 0), "purple": Color(0, 0, 1), "green": Color(0, 1, 0)}
-	if $Sprite2D and color in color_mapping:
-		$Sprite2D.modulate = color_mapping[color]
+	# Verbindung des Signals für die Kollisionserkennung
+	if $Area2D:
+		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
+	adjust_collision_shape()
+	
+func adjust_stats():
+	$Sprite2D.texture = get_image(size,color)
+	$".".scale = get_size(size)
 
-	if $"." and size in sprite_size:
-		$".".apply_scale(Vector2(sprite_size[size],sprite_size[size]))
 
-		
+func get_size(size: String) -> Vector2:
+	if size in sprite_size:
+		return Vector2(sprite_size[size],sprite_size[size])
+	print("Is null")
+	return Vector2(0,0)
+	
+func get_image(size: String, color: String) -> Texture2D:
+	if size in image_data and color in image_data[size]:
+		return image_data[size][color]
+	print("Is null")
+	return null
 		
 func _process(delta):
 	# Bewege den Asteroiden
@@ -50,6 +84,13 @@ func destroy():
 	"""
 	if $CollisionShape2D:
 		$CollisionShape2D.disabled = true
+	match size:
+		"small": 
+			Global.update_highscore(smallValue)
+		"medium": 
+			Global.update_highscore(mediumValue)
+		"large" :
+			Global.update_highscore(largeValue)
 	if drop_scene:
 		var drop_instance = drop_scene.instantiate()
 		drop_instance.size = size
@@ -65,3 +106,27 @@ func random_color() -> String:
 func random_size() -> String:
 	var sizes = ["small", "medium", "large"]
 	return sizes[randi() % sizes.size()]
+
+
+func _on_area_2d_body_entered(body) -> void:
+	if body.name == "Ship":
+		on_collision_with_ship(body)
+
+#Reduziert den Fuel des Schiffs bei einer Kollision.
+func on_collision_with_ship(ship):
+	if ship and ship.has_method("refill_fuel"):
+		ship.refill_fuel(-1)  # Reduziert den Tank
+		print("Ship fuel reduced due to asteroid collision!")
+		destroy()
+
+# passt die collision_shape der Asteroiden an die Größe der Sprites an
+func adjust_collision_shape():
+	if size == "small":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 250  # Kleiner Radius
+	elif size == "medium":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 200 # Mittlerer Radius
+	elif size == "large":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 160  # Großer Radius

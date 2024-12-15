@@ -72,7 +72,7 @@ func _load_chunk(chunk_key):
 		return
 	active_chunks[chunk_key] = []
 	# Spawn einzelner oder clusterweise Asteroiden
-	for i in range(randi_range(5, 10)):
+	for i in range(randi_range(1, 4)):
 		var asteroid = _get_asteroid()
 		asteroid.position = chunk_position + Vector2(randi_range(0, chunk_size), randi_range(0, chunk_size))
 		asteroid.visible = true
@@ -88,7 +88,7 @@ func _unload_chunk(chunk_key):
 func _init_pool(size):
 	for i in range(size):
 		var asteroid = asteroid_scene.instantiate()
-		var random_size = sizes[randi() % sizes.size()]
+		var random_size = random_size_gen()
 		var random_color = colors[randi() % colors.size()]
 		asteroid.size = random_size
 		asteroid.color = random_color
@@ -109,7 +109,9 @@ func _get_asteroid():
 
 	# Erstelle neuen Asteroiden, wenn kein gültiger gefunden wurde
 	var new_asteroid = asteroid_scene.instantiate()
-	var random_size = sizes[randi() % sizes.size()]
+	var random_size = random_size_gen()
+	
+	
 	var random_color = colors[randi() % colors.size()]
 	
 	new_asteroid.size = random_size
@@ -120,3 +122,34 @@ func _get_asteroid():
 	asteroid_pool.append(new_asteroid)
 	add_child(new_asteroid)
 	return new_asteroid
+
+
+func random_size_gen() -> String:
+	# Gewichtungen der Asteroiden
+	var weights = {
+		"small": 70,  # 50% Wahrscheinlichkeit
+		"medium": 20, # 30% Wahrscheinlichkeit
+		"large": 10   # 20% Wahrscheinlichkeit
+	}
+
+	# Gesamtgewicht berechnen
+	var total_weight = 0
+	for weight in weights.values():
+		total_weight += weight
+
+	# Zufälliger Wert im Bereich der Gesamtgewichtung
+	var random_value = randi() % total_weight
+
+	# Akkumulierte Gewichtung für Auswahl
+	var accumulated_weight = 0
+	for size in weights.keys():
+		accumulated_weight += weights[size]
+
+		# Debug-Ausgaben zur Nachverfolgung
+		
+
+		if random_value < accumulated_weight:
+			return size  # Rückgabe der Größe
+
+	# Fallback (sollte nie erreicht werden)
+	return "small"
