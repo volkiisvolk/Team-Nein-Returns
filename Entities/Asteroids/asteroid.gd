@@ -5,6 +5,9 @@ extends Node2D
 @export var color: String = "purple"  # Farbe des Asteroiden
 @export var health: int = 100  # Lebenspunkte des Asteroiden
 var direction = Vector2.ZERO
+var smallValue = 5
+var mediumValue = 10
+var largeValue = 15
 
 var sprite_size: Dictionary = {
 	"small": 0.4,
@@ -73,6 +76,13 @@ func destroy():
 	"""
 	if $CollisionShape2D:
 		$CollisionShape2D.disabled = true
+	match size:
+		"small": 
+			Global.update_highscore(smallValue)
+		"medium": 
+			Global.update_highscore(mediumValue)
+		"large" :
+			Global.update_highscore(largeValue)
 	if drop_scene:
 		var drop_instance = drop_scene.instantiate()
 		drop_instance.size = size
