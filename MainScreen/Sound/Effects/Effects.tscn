@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwt5jx5ulbrof"]
+[gd_scene load_steps=10 format=3 uid="uid://bwt5jx5ulbrof"]
 
+[ext_resource type="Script" path="res://MainScreen/Sound/Effects/effects.gd" id="1_lggfo"]
 [ext_resource type="AudioStream" uid="uid://mjar4uwiw3xv" path="res://MainScreen/Sound/Effects/Tod.mp3" id="1_lq4r1"]
 [ext_resource type="AudioStream" uid="uid://4rtvbd1fel7c" path="res://MainScreen/Sound/Effects/Shotpower.mp3" id="2_3hsyg"]
 [ext_resource type="AudioStream" uid="uid://d0f3vqfa7d3vl" path="res://MainScreen/Sound/Effects/Speed.mp3" id="3_cxklh"]
@@ -12,6 +13,7 @@
 [node name="Effects" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_lggfo")
 
 [node name="Tod" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_lq4r1")

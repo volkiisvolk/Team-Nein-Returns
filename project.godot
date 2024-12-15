@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://Global/Global.gd"
 Sound="*res://MainScreen/Sound/Soundtrack/sound.tscn"
+Effects="*res://MainScreen/Sound/Effects/Effects.tscn"
 
 [display]
 

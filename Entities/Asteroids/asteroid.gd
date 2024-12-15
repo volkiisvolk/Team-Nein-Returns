@@ -85,9 +85,7 @@ func take_damage(amount: int):
 		
 
 func destroy():
-	print(large_destroyed)
-	if large_destroyed:
-		large_destroyed.play() # sound effect
+	Effects.asteroid_small_destroyed()
 	"""
 	Zerstört den Asteroiden und erzeugt ggf. einen Drop.
 	"""
