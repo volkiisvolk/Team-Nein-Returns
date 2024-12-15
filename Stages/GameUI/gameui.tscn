@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmoa5y0ovyqva"]
+
+[ext_resource type="Script" path="res://Stages/GameUI/gameui.gd" id="1_3vxjh"]
+[ext_resource type="Texture2D" uid="uid://rhbnqfcrxcwt" path="res://Stages/GameUI/Assets/legend.png" id="1_kf02d"]
+[ext_resource type="Texture2D" uid="uid://fnnoovpppwj8" path="res://Stages/GameUI/Assets/Crafting.png" id="2_35xnt"]
+[ext_resource type="Texture2D" uid="uid://cuc2w76eajdf4" path="res://Stages/GameUI/Assets/Greenicon.png" id="4_0bdrk"]
+[ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="5_iid1f"]
+[ext_resource type="Texture2D" uid="uid://mu0xjmhmreav" path="res://Stages/GameUI/Assets/Fuelsign.png" id="6_6sfwm"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_3vxjh")
+
+[node name="Score" type="Label" parent="."]
+offset_left = -8.0
+offset_top = 38.0
+offset_right = 1922.0
+offset_bottom = 109.0
+theme_override_fonts/font = ExtResource("5_iid1f")
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_direction = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1906.0
+offset_top = 4.0
+offset_right = -1628.0
+offset_bottom = -420.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="LegendSprite" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(2.99996, 13)
+scale = Vector2(0.462418, 0.511463)
+texture = ExtResource("1_kf02d")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="VBoxContainer"]
+
+[node name="CraftingSprite" type="Sprite2D" parent="VBoxContainer/CanvasLayer"]
+position = Vector2(1770.86, 467.375)
+scale = Vector2(0.468548, 0.468548)
+texture = ExtResource("2_35xnt")
+
+[node name="HBoxItems" type="HBoxContainer" parent="VBoxContainer/CanvasLayer"]
+offset_left = 106.0
+offset_top = 523.0
+offset_right = 384.0
+offset_bottom = 523.0
+
+[node name="Greenicon" type="Sprite2D" parent="VBoxContainer/CanvasLayer/HBoxItems"]
+position = Vector2(160, -56)
+scale = Vector2(0.676471, 0.676471)
+texture = ExtResource("4_0bdrk")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Speed" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_iid1f")
+theme_override_font_sizes/font_size = 26
+text = "speed upgrade:"
+
+[node name="Firepower" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_iid1f")
+theme_override_font_sizes/font_size = 26
+text = "firepower upgrade:"
+
+[node name="FuelSprite" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(30, 716)
+scale = Vector2(0.806452, 0.806452)
+texture = ExtResource("6_6sfwm")
+
+[node name="FuelLabel" type="Label" parent="VBoxContainer/FuelSprite"]
+layout_direction = 2
+offset_left = 45.8799
+offset_top = -12.4
+offset_right = 266.88
+offset_bottom = 15.6
+theme_override_font_sizes/font_size = 20
+vertical_alignment = 1
