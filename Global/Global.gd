@@ -4,6 +4,10 @@ extends Node
 var highscore: int = 0
 var player_name: String = "Volki"  # Standard-Spielername
 
+# max vars
+const MAX_SPEED = 1000 # Maximale erlaubte Geschwindigkeit (Tempolimit)
+const MAX_DAMAGE = 20 #Maximale erlaubte Damage
+
 # Liste für alle Highscores
 var highscores: Array = []  # Liste für mehrere Highscores
 

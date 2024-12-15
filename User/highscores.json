@@ -1,30 +1,22 @@
 [
 	{
-		"name": "Anna",
-		"score": 2000
+		"name": "lalala",
+		"score": 10
 	},
 	{
-		"name": "asd",
-		"score": 25
-	},
-	{
-		"name": "Jannis",
-		"score": 350
-	},
-	{
-		"name": "Volkii",
+		"name": "Player2",
 		"score": 600
-	},
-	{
-		"name": "Player3",
-		"score": 500
 	},
 	{
 		"name": "Volki",
 		"score": 150
 	},
 	{
-		"name": "Player2",
+		"name": "Player3",
+		"score": 500
+	},
+	{
+		"name": "Volkii",
 		"score": 600
 	},
 	{
@@ -32,7 +24,19 @@
 		"score": 600
 	},
 	{
-		"name": "lalala",
-		"score": 10
+		"name": "Jannis",
+		"score": 350
+	},
+	{
+		"name": "asd",
+		"score": 25
+	},
+	{
+		"name": "Anna",
+		"score": 2000
+	},
+	{
+		"name": "savehighscorescene",
+		"score": 25
 	}
 ]

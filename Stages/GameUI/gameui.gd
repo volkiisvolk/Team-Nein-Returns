@@ -1,13 +1,14 @@
 extends CanvasLayer
 
 @onready var fuel_label = $FuelSprite/FuelLabel
-@onready var speed_label = $VBoxContainer/Speed
-@onready var damage_label = $VBoxContainer/Firepower
+@onready var speed_bar = $VBoxContainer/SpeedContainer/SpeedBar
+@onready var damage_bar = $VBoxContainer/FirepowerContainer/FirepowerBar
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	speed_bar.max_value = Global.MAX_SPEED
+	damage_bar.max_value = Global.MAX_DAMAGE
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -17,7 +18,6 @@ func _process(delta: float) -> void:
 
 func _on_ship_fuel_change(fuel_new: Variant, fuel_max: Variant) -> void:
 	update_fuel_display(fuel_new, fuel_max)
-
 
 # zeigt fuel an
 func update_fuel_display(fuel: Variant, max_fuel: Variant):
@@ -33,11 +33,14 @@ func update_fuel_display(fuel: Variant, max_fuel: Variant):
 
 
 func _on_ship_speed_change(speed: Variant) -> void:
-	speed_label.text = "speed upgrade: " + str(speed)
+	speed_bar.value = speed
+	print("speedbar " + str(speed_bar.value))
 	
 
 func _on_ship_damage_change(damage: Variant) -> void:
-	damage_label.text = "firepower upgrade: " + str(damage)
+	damage_bar.value = damage
+	print("damagebar " + str(damage_bar.value))
+
 
 
 func _on_ship_inventory_change(color: Variant, craft: Variant) -> void:
