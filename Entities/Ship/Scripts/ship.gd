@@ -5,12 +5,11 @@ const MAX_SPEED = Global.MAX_SPEED # Maximale erlaubte Geschwindigkeit (Tempolim
 const JUMP_VELOCITY = -400.0
 const MAX_DAMAGE = Global.MAX_DAMAGE #Maximale erlaubte Damage
 
-var fuel = 70.0 # Startwert für fuel
+var fuel = 100.0 # Startwert für fuel
 var max_fuel = 100.0 # Maximale aktuelle Tankfüllung
 const MAX_FUEL_CAP = 500 # Maximal erreichbare Tankfüllung
-var MAX_SPEED = 500
 var current_speed = SPEED # Aktuelle Geschwindigkeit
-const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
+const FUEL_CONSUMPTION_RATE = 2.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
 
