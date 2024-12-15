@@ -14,4 +14,5 @@
 
 [connection signal="damage_change" from="Ship" to="Control" method="_on_ship_damage_change"]
 [connection signal="fuel_change" from="Ship" to="Control" method="_on_ship_fuel_change"]
+[connection signal="inventory_change" from="Ship" to="Control" method="_on_ship_inventory_change"]
 [connection signal="speed_change" from="Ship" to="Control" method="_on_ship_speed_change"]
