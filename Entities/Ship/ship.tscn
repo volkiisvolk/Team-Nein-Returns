@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cnjcfx0l0tr4f" path="res://Entities/Ship/Assets/Sprites/playersprite.png" id="2_8nx3m"]
 [ext_resource type="PackedScene" uid="uid://bji84x6xrprv4" path="res://Entities/Shoot/bullet.tscn" id="3_wwhk2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fjgip"]
-radius = 5.38516
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kk8n6"]
+radius = 30.0
+height = 118.0
 
 [node name="Ship" type="CharacterBody2D"]
 z_index = 10
@@ -20,8 +21,8 @@ texture = ExtResource("2_8nx3m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-position = Vector2(0, 7)
-shape = SubResource("CircleShape2D_fjgip")
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_kk8n6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
