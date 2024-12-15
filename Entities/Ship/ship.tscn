@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2q384qq8ce6s"]
+[gd_scene load_steps=7 format=3 uid="uid://c2q384qq8ce6s"]
 
 [ext_resource type="Script" path="res://Entities/Ship/Scripts/ship.gd" id="1_5s1d4"]
 [ext_resource type="Texture2D" uid="uid://cnjcfx0l0tr4f" path="res://Entities/Ship/Assets/Sprites/playersprite.png" id="2_8nx3m"]
+[ext_resource type="Texture2D" uid="uid://d3ihet2b84duj" path="res://Entities/Ship/Assets/Sprites/Untitled_Artwork 3.png" id="2_j1k25"]
 [ext_resource type="PackedScene" uid="uid://bji84x6xrprv4" path="res://Entities/Shoot/bullet.tscn" id="3_wwhk2"]
+
+[sub_resource type="Gradient" id="Gradient_wdv18"]
+offsets = PackedFloat32Array(0.0333333, 0.143333, 0.813333, 0.996667)
+colors = PackedColorArray(0, 0, 0, 0, 0.776471, 0.101961, 0.215686, 1, 1, 0.741176, 0, 1, 1, 0.741176, 0, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kk8n6"]
 radius = 30.0
@@ -13,6 +18,27 @@ z_index = 10
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_5s1d4")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-11, 0)
+rotation = 0.0702557
+amount = 55
+explosiveness = 0.12
+randomness = 0.06
+lifetime_randomness = 0.33
+texture = ExtResource("2_j1k25")
+emission_shape = 1
+emission_sphere_radius = 14.58
+direction = Vector2(-1, 0)
+spread = 21.86
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 400.0
+angle_min = -128.6
+angle_max = -77.7
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_wdv18")
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -0.00012207)
