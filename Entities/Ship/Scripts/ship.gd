@@ -10,7 +10,14 @@ var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 5.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
+var sprite_size: Dictionary = {
+	"small": 1,
+	"medium": 3,
+	"large": 7
+}
+
 @onready var crafting_inventory: Array[String] = ["null", "null"] # crafting inventory
+@onready var size_inventory: Array[String] = ["null", "null"] # crafting inventory
 @onready var fuel_label = $HUD/FuelLabel
 @onready var hud = $HUD
 @onready var bullet_scene = $Laser
@@ -99,18 +106,21 @@ Logic für das Craften
 """
 func reset_inventory() -> void:
 	crafting_inventory = ["null", "null"]
+	size_inventory = ["null", "null"]
 
 # Fügt den Drop dem Inventar hinzu
 func add_drop_to_inventory(color: String, size: String) -> void:
 	#Check ob inventory voll ist (beide Slots belegt)
 	if(crafting_inventory[0] == "null"):
 		crafting_inventory[0] = color
+		size_inventory[0] = size
 	elif (crafting_inventory[1] == "null"):
 		crafting_inventory[1] = color
-		craft_upgrades(color, size)
+		size_inventory[1] = size
+		craft_upgrades()
 	
-	
-func craft_upgrades(color: String, size: String) -> void:
+func craft_upgrades() -> void:
+	var multiplier = sprite_size[size_inventory[0]] * sprite_size[size_inventory[1]]
 	#Die var node_ship ist für den Zugriff auf das Script ship.
 	if(crafting_inventory[1] != "null"):
 		
@@ -118,21 +128,19 @@ func craft_upgrades(color: String, size: String) -> void:
 		if(crafting_inventory[0] == crafting_inventory[1]):
 			print("Fuel ADD")
 			# TODO der Wert muss der Funktion übergeben werden
-			refill_fuel(20)
+			refill_fuel(20*multiplier)
 			# Leere das Inventory
 			reset_inventory()
 		else:
-			match crafting_inventory[0]:
-				"red":
-					upgrade_damage(10.0)
-					reset_inventory()
-				"blue":
-					#updgrade_fuel
-					update_fuel_display()
-					reset_inventory()
-				"green":
-					upgrade_speed(10.0)
-					reset_inventory()
+			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
+				upgrade_tank_capacity(20*multiplier)
+				reset_inventory()
+			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
+				upgrade_speed(20*multiplier)
+				reset_inventory()
+			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
+				upgrade_damage(20*multiplier)
+				reset_inventory()
 				
 				
 		
