@@ -90,7 +90,8 @@ func refill_fuel(amount: float) -> void:
 	# Sicherstellen, dass der Tank nicht über das Maximum geht
 	fuel = min(fuel, max_fuel) 
 	fuel_change.emit(fuel, max_fuel)
-	Effects.fuel() # sound effect
+	if amount > 0:
+		Effects.fuel() # sound effect
 
 # Halbiert die Tankfüllung
 func half_fuel() -> void:

@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://xrta8bwle861"
-path="res://.godot/imported/Käfer Gesang3.mp3-110059801fffdc1b1a7d1ede2e4ccc4d.mp3str"
+uid="uid://1a1tdqofhdmw"
+path="res://.godot/imported/Käfer gesang3.mp3-4395f12d80cc641b4b2f57108d5a2ac3.mp3str"
 
 [deps]
 
-source_file="res://MainScreen/Sound/Effects/Käfer Gesang3.mp3"
-dest_files=["res://.godot/imported/Käfer Gesang3.mp3-110059801fffdc1b1a7d1ede2e4ccc4d.mp3str"]
+source_file="res://MainScreen/Sound/Effects/Käfer gesang3.mp3"
+dest_files=["res://.godot/imported/Käfer gesang3.mp3-4395f12d80cc641b4b2f57108d5a2ac3.mp3str"]
 
 [params]
 
