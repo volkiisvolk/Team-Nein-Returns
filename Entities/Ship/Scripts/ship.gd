@@ -116,7 +116,11 @@ func refill_fuel(amount: float) -> void:
 
 # Halbiert die Tankfüllung
 func half_fuel() -> void:
-	fuel = fuel / 2
+	if(fuel < max_fuel /2):
+		Effects.death()
+		get_tree().change_scene_to_file("res://MainScreen/savehighscorescene.tscn")
+	else:
+		fuel = fuel / 2
 
 # aufrufen für Tank-Upgrade
 func upgrade_tank_capacity(amount: float) -> void:
@@ -178,7 +182,7 @@ func craft_upgrades() -> void:
 		if(crafting_inventory[0] == crafting_inventory[1]):
 			print("Fuel ADD")
 			# TODO der Wert muss der Funktion übergeben werden
-			refill_fuel(20*multiplier)
+			refill_fuel(40*multiplier)
 			inventory_change.emit("", "fuel")
 			# Leere das Inventory
 			reset_inventory()
