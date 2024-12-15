@@ -10,8 +10,10 @@ func _process(delta: float) -> void:
 	
 	
 func _on_continue_button_pressed() -> void:
+	Effects.button_click()
 	get_tree().change_scene_to_file("res://Stages/MainGame/game.tscn")
 
 
 func _on_back_to_menu_pressed() -> void:
-		get_tree().change_scene_to_file("res://MainScreen/mainscreen.tscn")
+	Effects.button_click()
+	get_tree().change_scene_to_file("res://MainScreen/mainscreen.tscn")

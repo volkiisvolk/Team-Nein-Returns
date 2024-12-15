@@ -19,11 +19,13 @@ config/icon="res://icon.svg"
 
 Global="*res://Global/Global.gd"
 Sound="*res://MainScreen/Sound/Soundtrack/sound.tscn"
+Effects="*res://MainScreen/Sound/Effects/Effects.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1077
+window/size/mode=3
 window/size/resizable=false
 
 [dotnet]

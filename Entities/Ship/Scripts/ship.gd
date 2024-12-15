@@ -12,7 +12,6 @@ var current_speed = SPEED # Aktuelle Geschwindigkeit
 const FUEL_CONSUMPTION_RATE = 2.0 # Spritverbrauch pro Sekunde bei Bewegung 
 const FUEL_BLOCKS = 10 # Anzahl der angezeigten Tankblöcke
 
-
 var sprite_size: Dictionary = {
 	"small": 1,
 	"medium": 3,
@@ -97,6 +96,7 @@ func update_rotation(delta: float) -> void:
 # prüft Tank
 func check_fuel(delta):
 	if fuel <= 0:
+		Effects.death()
 		get_tree().change_scene_to_file("res://MainScreen/savehighscorescene.tscn")
 		# Hier Code für Endscreen oder so
 	else:
@@ -111,6 +111,8 @@ func refill_fuel(amount: float) -> void:
 	# Sicherstellen, dass der Tank nicht über das Maximum geht
 	fuel = min(fuel, max_fuel) 
 	fuel_change.emit(fuel, max_fuel)
+	if amount > 0:
+		Effects.fuel() # sound effect
 
 # Halbiert die Tankfüllung
 func half_fuel() -> void:
@@ -119,6 +121,7 @@ func half_fuel() -> void:
 # aufrufen für Tank-Upgrade
 func upgrade_tank_capacity(amount: float) -> void:
 	if max_fuel < MAX_FUEL_CAP:
+		Effects.tank_upgrade() # sound effect
 		max_fuel += amount
 		fuel = min(fuel, max_fuel) # fuel ist nicht über max_fuel
 		fuel_change.emit(fuel, max_fuel)
@@ -127,6 +130,7 @@ func upgrade_tank_capacity(amount: float) -> void:
 # aufrufen für Speed-Upgrade
 func upgrade_speed(amount: float) -> void:
 	if current_speed < MAX_SPEED:
+		Effects.speed_upgrade() #sound effect
 		current_speed += amount
 		if current_speed > 500:
 			current_speed = 500
@@ -137,9 +141,12 @@ func upgrade_speed(amount: float) -> void:
 func upgrade_damage(amount: int) -> void:
 	print("amount " + str(amount))
 	if amount < MAX_DAMAGE:
+		Effects.damage_upgrade() # sound effect
 		bullet_scene.set_damage(amount)
 		var damage = bullet_scene.get_damage()
 		damage_change.emit(damage)
+
+
 
 
 """

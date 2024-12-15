@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dgnsvxbuo6wim"
+path="res://.godot/imported/Meteor groß.mp3-09556e6c9278f87ae94d27f98627b7a0.mp3str"
+
+[deps]
+
+source_file="res://MainScreen/Sound/Effects/Meteor groß.mp3"
+dest_files=["res://.godot/imported/Meteor groß.mp3-09556e6c9278f87ae94d27f98627b7a0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
