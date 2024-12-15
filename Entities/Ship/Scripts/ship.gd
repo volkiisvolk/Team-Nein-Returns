@@ -23,7 +23,6 @@ signal speed_change(speed)
 @onready var fuel_label = $HUD/FuelLabel
 @onready var hud = $HUD
 @onready var bullet_scene = $Laser
-@onready var damage = $Laser.current_damage
 @onready var laser = $Laser 
 @onready var sprite = $Sprite # Node des Sprites (falls vorhanden)
 
@@ -136,7 +135,6 @@ func craft_upgrades() -> void:
 		else:
 			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
 				upgrade_tank_capacity(20*multiplier)
-				fuel_change.emit(fuel, max_fuel)
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
 				upgrade_speed(20*multiplier)

@@ -37,4 +37,3 @@ func _on_ship_speed_change(speed: Variant) -> void:
 
 func _on_ship_damage_change(damage: Variant) -> void:
 	damage_label.text = "firepower upgrade: " + str(damage)
-
