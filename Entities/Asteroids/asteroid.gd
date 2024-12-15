@@ -10,7 +10,6 @@ var mediumValue = 10
 var largeValue = 15
 
 
-
 var sprite_size: Dictionary = {
 	"small": 0.4,
 	"medium": 1,
@@ -104,7 +103,6 @@ var image_data: Dictionary = {
 
 func _ready():
 	# Initialisiere Lebenspunkte basierend auf der Größe
-	
 	direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 	adjust_stats()
 	
@@ -113,10 +111,11 @@ func _ready():
 		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
 	
 	adjust_collision_shape()
+
 	await get_tree().create_timer(1.0).timeout  # 2 Sekunden Schutzzeit
 	spawnprotected = false
 	print("Asteroid ist jetzt nicht mehr geschützt.")
-	
+
 func adjust_stats():
 	$Sprite2D.texture = get_image(size,color)
 	$".".scale = get_size(size)
@@ -213,6 +212,7 @@ func take_damage(amount: int):
 	
 	if health <= 0:
 		destroy()
+		
 
 func destroy():
 	"""
@@ -220,22 +220,25 @@ func destroy():
 	"""
 	if $CollisionShape2D:
 		$CollisionShape2D.disabled = true
-	if not spawnprotected:
-		match size:
-			"small": 
-				Global.update_highscore(smallValue)
-			"medium": 
-				Global.update_highscore(mediumValue)
-			"large" :
-				Global.update_highscore(largeValue)
-		if drop_scene:
-			var drop_instance = drop_scene.instantiate()
-			drop_instance.size = size
-			drop_instance.color = color
-			drop_instance.position = position
-			get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
-		call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
-	
+	match size:
+		"small": 
+			Effects.asteroid_small_destroyed() # sound effect
+			Global.update_highscore(smallValue)
+		"medium": 
+			Effects.asteroid_medium_destroyed()
+			Global.update_highscore(mediumValue)
+		"large" :
+			Effects.asteroid_large_destroyed()
+			Global.update_highscore(largeValue)
+	if drop_scene:
+		var drop_instance = drop_scene.instantiate()
+		drop_instance.size = size
+		drop_instance.color = color
+		drop_instance.position = position
+		get_parent().add_child(drop_instance)  # Füge den Drop zur Szene hinzu
+	call_deferred_thread_group("queue_free")  # Entferne den Asteroiden aus der Szene
+
+
 func random_color() -> String:
 	var colors = ["red", "blue", "green"]
 	return colors[randi() % colors.size()]

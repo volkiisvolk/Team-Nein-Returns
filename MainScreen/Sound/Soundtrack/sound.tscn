@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccxglyydo6f2y"]
 
-[ext_resource type="AudioStream" uid="uid://xc2jar6gh3ss" path="res://MainScreen/Sound/Soundtrack/Whigfield - Saturday Night.mp3" id="1_p312d"]
+[ext_resource type="AudioStream" uid="uid://6vftl4jttbe4" path="res://MainScreen/Sound/Soundtrack/Music_1.wav" id="1_nv38m"]
 
 [node name="Sound" type="Control"]
 layout_mode = 3
@@ -11,5 +11,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("1_p312d")
+stream = ExtResource("1_nv38m")
 autoplay = true
