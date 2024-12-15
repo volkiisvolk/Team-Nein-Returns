@@ -5,6 +5,11 @@ extends Node2D
 @export var color: String = "purple"  # Farbe des Asteroiden
 @export var health: int = 100  # Lebenspunkte des Asteroiden
 var direction = Vector2.ZERO
+var smallValue = 5
+var mediumValue = 10
+var largeValue = 15
+
+
 
 var sprite_size: Dictionary = {
 	"small": 0.4,
@@ -37,6 +42,12 @@ func _ready():
 	
 	direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 	adjust_stats()
+	
+	# Verbindung des Signals für die Kollisionserkennung
+	if $Area2D:
+		$Area2D.connect("body_entered", Callable(self, "_on_body_entered"))
+	
+	adjust_collision_shape()
 	
 func adjust_stats():
 	$Sprite2D.texture = get_image(size,color)
@@ -73,6 +84,13 @@ func destroy():
 	"""
 	if $CollisionShape2D:
 		$CollisionShape2D.disabled = true
+	match size:
+		"small": 
+			Global.update_highscore(smallValue)
+		"medium": 
+			Global.update_highscore(mediumValue)
+		"large" :
+			Global.update_highscore(largeValue)
 	if drop_scene:
 		var drop_instance = drop_scene.instantiate()
 		drop_instance.size = size
@@ -88,3 +106,27 @@ func random_color() -> String:
 func random_size() -> String:
 	var sizes = ["small", "medium", "large"]
 	return sizes[randi() % sizes.size()]
+
+
+func _on_area_2d_body_entered(body) -> void:
+	if body.name == "Ship":
+		on_collision_with_ship(body)
+
+#Reduziert den Fuel des Schiffs bei einer Kollision.
+func on_collision_with_ship(ship):
+	if ship and ship.has_method("refill_fuel"):
+		ship.refill_fuel(-1)  # Reduziert den Tank
+		print("Ship fuel reduced due to asteroid collision!")
+		destroy()
+
+# passt die collision_shape der Asteroiden an die Größe der Sprites an
+func adjust_collision_shape():
+	if size == "small":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 250  # Kleiner Radius
+	elif size == "medium":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 200 # Mittlerer Radius
+	elif size == "large":
+		$Area2D/CollisionShape2D.shape = CircleShape2D.new()
+		$Area2D/CollisionShape2D.shape.radius = 160  # Großer Radius

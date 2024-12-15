@@ -35,12 +35,3 @@ func get_image(size: String, color: String) -> Texture2D:
 	
 func modulate_sprite():
 	$Sprite2D.texture = get_image(size,color)
-
-
-func _on_Area2D_body_entered(body):
-	"""
-	Reagiere, wenn ein Spieler das Drop-Objekt einsammelt.
-	"""
-	if body.name == "Ship":  # Passe den Namen des Spieler-Nodes an
-		emit_signal("collected", {"color": color, "size": size})
-		queue_free()  # Entferne den Drop aus der Szene
