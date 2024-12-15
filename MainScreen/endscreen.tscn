@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjk28skwo2v3v"]
+[gd_scene load_steps=5 format=3 uid="uid://dlq63y7sjdb8s"]
 
 [ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="1_ba6xd"]
 [ext_resource type="Script" path="res://MainScreen/endscreen.gd" id="1_j44mt"]

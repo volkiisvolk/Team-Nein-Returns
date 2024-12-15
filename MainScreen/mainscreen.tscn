@@ -1,15 +1,152 @@
-[gd_scene load_steps=9 format=3 uid="uid://tq5fll4yirnd"]
+[gd_scene load_steps=15 format=3 uid="uid://tq5fll4yirnd"]
 
 [ext_resource type="Script" path="res://MainScreen/mainscreen.gd" id="1_2et5m"]
 [ext_resource type="FontFile" uid="uid://movlob1f0cw3" path="res://MainScreen/Fonts/Squarea Regular.ttf" id="2_4n2mf"]
 [ext_resource type="FontFile" uid="uid://b5pjuuf5og2x5" path="res://MainScreen/Fonts/Cube.ttf" id="3_1axar"]
 [ext_resource type="Script" path="res://MainScreen/HoverLogic/start_button.gd" id="3_ky6y8"]
+[ext_resource type="Texture2D" uid="uid://cjxctc32658u1" path="res://Entities/Asteroids/assets/asteroidred.png" id="3_vojbu"]
 [ext_resource type="Script" path="res://MainScreen/HoverLogic/options_button.gd" id="4_l60ua"]
 [ext_resource type="Script" path="res://MainScreen/HoverLogic/quit_button.gd" id="5_8k04p"]
 [ext_resource type="Texture2D" uid="uid://c25oocefyuowb" path="res://Stages/World/Background/Stars_back.png" id="7_l03mi"]
+[ext_resource type="Texture2D" uid="uid://xh8bwo5o2d57" path="res://MainScreen/assets/mainscreenplanet.png" id="8_00gtt"]
+[ext_resource type="Texture2D" uid="uid://duvnq4lrd0ytk" path="res://Entities/Asteroids/assets/asteroidgreen.png" id="9_d7mwj"]
 
 [sub_resource type="FontVariation" id="FontVariation_mkvn4"]
 base_font = ExtResource("2_4n2mf")
+
+[sub_resource type="Animation" id="Animation_jo27o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Mainscreenplanet:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.297783]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Asteroidgreen:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Asteroidred2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(201, -13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Asteroidred2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.240223]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Asteroidred:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.229648]
+}
+
+[sub_resource type="Animation" id="Animation_sxjtq"]
+resource_name = "mainscreenplanet"
+length = 6.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Mainscreenplanet:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.297783, 0.344711]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Asteroidgreen:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.408407]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Asteroidred2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(201, -13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Asteroidred2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.289918, 0.240223]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Asteroidred:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.252306, -0.331261]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_13cq5"]
+_data = {
+"RESET": SubResource("Animation_jo27o"),
+"mainscreenplanet": SubResource("Animation_sxjtq")
+}
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -93,6 +230,37 @@ theme_override_fonts/font = ExtResource("3_1axar")
 theme_override_font_sizes/font_size = 70
 text = "Raumschiff
 "
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_13cq5")
+}
+autoplay = "mainscreenplanet"
+
+[node name="Asteroidgreen" type="Sprite2D" parent="AnimationPlayer"]
+z_index = -1
+position = Vector2(1617, -116)
+scale = Vector2(0.439991, 0.439991)
+texture = ExtResource("9_d7mwj")
+
+[node name="Asteroidred2" type="Sprite2D" parent="AnimationPlayer"]
+z_index = -1
+position = Vector2(201, -13)
+rotation = 0.240223
+scale = Vector2(0.251916, 0.251916)
+texture = ExtResource("3_vojbu")
+
+[node name="Asteroidred" type="Sprite2D" parent="AnimationPlayer"]
+position = Vector2(1815, 1011)
+rotation = 0.229648
+scale = Vector2(0.251916, 0.251916)
+texture = ExtResource("3_vojbu")
+
+[node name="Mainscreenplanet" type="Sprite2D" parent="AnimationPlayer"]
+position = Vector2(348, 1263)
+rotation = -0.297783
+scale = Vector2(0.434845, 0.434845)
+texture = ExtResource("8_00gtt")
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/StartButton" to="CenterContainer/VBoxContainer/StartButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/StartButton" to="CenterContainer/VBoxContainer/StartButton" method="_on_mouse_exited"]

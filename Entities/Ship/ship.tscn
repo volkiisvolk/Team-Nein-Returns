@@ -1,17 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2q384qq8ce6s"]
+[gd_scene load_steps=7 format=3 uid="uid://c2q384qq8ce6s"]
 
 [ext_resource type="Script" path="res://Entities/Ship/Scripts/ship.gd" id="1_5s1d4"]
 [ext_resource type="Texture2D" uid="uid://cnjcfx0l0tr4f" path="res://Entities/Ship/Assets/Sprites/playersprite.png" id="2_8nx3m"]
+[ext_resource type="Texture2D" uid="uid://chemoa550i1um" path="res://Entities/Ship/Assets/Sprites/Untitled_Artwork 3.png" id="2_j1k25"]
 [ext_resource type="PackedScene" uid="uid://bji84x6xrprv4" path="res://Entities/Shoot/bullet.tscn" id="3_wwhk2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fjgip"]
-radius = 5.38516
+[sub_resource type="Gradient" id="Gradient_hufl8"]
+offsets = PackedFloat32Array(0, 0.716667, 1)
+colors = PackedColorArray(1, 0.0901961, 0.184314, 1, 1, 0.647059, 0, 1, 1, 0.647059, 0, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jng7p"]
+radius = 19.0
+height = 98.0
 
 [node name="Ship" type="CharacterBody2D"]
 z_index = 10
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_5s1d4")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-41, 0)
+rotation = 3.18951
+amount = 70
+lifetime = 2.0
+explosiveness = 0.05
+randomness = 0.06
+lifetime_randomness = 0.58
+texture = ExtResource("2_j1k25")
+emission_shape = 1
+emission_sphere_radius = 14.57
+spread = 12.28
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angle_min = -123.6
+angle_max = -65.5
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_hufl8")
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -0.00012207)
@@ -20,8 +47,9 @@ texture = ExtResource("2_8nx3m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-position = Vector2(0, 7)
-shape = SubResource("CircleShape2D_fjgip")
+position = Vector2(-5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jng7p")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
