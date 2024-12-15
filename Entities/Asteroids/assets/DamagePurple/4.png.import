@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2a8cykjmniyf"
-path="res://.godot/imported/R4.png-1dc03126da9b6bb98025fb225cae715c.ctex"
+uid="uid://cedgpd0hudrbp"
+path="res://.godot/imported/4.png-fb2e2fd26e8535d6a99d8f8009f08aec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Asteroids/assets/DamageRed/R4.png"
-dest_files=["res://.godot/imported/R4.png-1dc03126da9b6bb98025fb225cae715c.ctex"]
+source_file="res://Entities/Asteroids/assets/DamagePurple/4.png"
+dest_files=["res://.godot/imported/4.png-fb2e2fd26e8535d6a99d8f8009f08aec.ctex"]
 
 [params]
 

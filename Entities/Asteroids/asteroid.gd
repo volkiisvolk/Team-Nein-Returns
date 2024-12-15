@@ -181,10 +181,13 @@ func take_damage(amount: int):
 			print(color+"4")
 			$Sprite2D.texture = get_image(size,color+"4")
 		elif health < 220 and health >= 150:
+			print(color+"5")
 			$Sprite2D.texture = get_image(size,color+"5")
 		elif health < 80 and health >= 10: 
+			print(color+"6")
 			$Sprite2D.texture = get_image(size,color+"6")
 		elif health < 10 and health >= 0:
+			print(color+"7")
 			$Sprite2D.texture = get_image(size,color+"7")
 			
 	if size == "large":
