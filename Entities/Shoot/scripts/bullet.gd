@@ -152,3 +152,6 @@ func _process(delta: float) -> void:
 
 func set_damage(amount: int) -> void:
 	current_damage += amount
+	
+func get_damage() -> int:
+	return current_damage

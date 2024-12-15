@@ -63,6 +63,7 @@ layout_mode = 2
 
 [node name="SpeedBar" type="TextureProgressBar" parent="VBoxContainer/SpeedContainer"]
 layout_mode = 2
+value = 1.0
 texture_under = ExtResource("5_y45x4")
 texture_progress = ExtResource("6_keax4")
 
@@ -78,6 +79,7 @@ layout_mode = 2
 [node name="FirepowerBar" type="TextureProgressBar" parent="VBoxContainer/FirepowerContainer"]
 layout_mode = 2
 max_value = 10.0
+value = 1.0
 texture_under = ExtResource("5_y45x4")
 texture_progress = ExtResource("6_keax4")
 
