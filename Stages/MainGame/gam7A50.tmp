@@ -12,6 +12,5 @@
 
 [node name="Ship" parent="." instance=ExtResource("2_y2t7q")]
 
-[connection signal="damage_change" from="Ship" to="Control" method="_on_ship_damage_change"]
 [connection signal="fuel_change" from="Ship" to="Control" method="_on_ship_fuel_change"]
 [connection signal="speed_change" from="Ship" to="Control" method="_on_ship_speed_change"]
