@@ -4,7 +4,7 @@ const SPEED = 200.0 # Startwert für Speed
 const MAX_SPEED = 1000 # Maximale erlaubte Geschwindigkeit (Tempolimit)
 const JUMP_VELOCITY = -400.0
 
-var fuel = 100.0 # Startwert für fuel
+var fuel = 70.0 # Startwert für fuel
 var max_fuel = 100.0 # Maximale aktuelle Tankfüllung
 const MAX_FUEL_CAP = 500 # Maximal erreichbare Tankfüllung
 
@@ -140,14 +140,14 @@ func craft_upgrades() -> void:
 			reset_inventory()
 		else:
 			if(crafting_inventory.has("purple") and crafting_inventory.has("green")):
-				upgrade_tank_capacity(20*multiplier)
+				upgrade_tank_capacity(10*multiplier)
 				fuel_change.emit(fuel, max_fuel)
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("green")):
-				upgrade_speed(20*multiplier)
+				upgrade_speed(5*multiplier)
 				reset_inventory()
 			if(crafting_inventory.has("red") and crafting_inventory.has("purple")):
-				upgrade_damage(20*multiplier)
+				upgrade_damage(1*multiplier)
 				reset_inventory()
 				
 		

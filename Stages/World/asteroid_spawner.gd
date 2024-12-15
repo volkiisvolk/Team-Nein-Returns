@@ -21,8 +21,8 @@ var size_speed_mapping: Dictionary = {
 }
 var size_health_mapping: Dictionary = {
 	"small": 50,
-	"medium": 100,
-	"large": 200
+	"medium": 250,
+	"large": 1000
 }
 
 func _ready():
