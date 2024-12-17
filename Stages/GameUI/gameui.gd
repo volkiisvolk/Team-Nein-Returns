@@ -27,7 +27,7 @@ func update_fuel_display(fuel: Variant, max_fuel: Variant):
 	var empty_blocks = total_blocks - filled_blocks
 	
 	# Erstelle Anzeige 
-	var fuel_bar = " █".repeat(filled_blocks) + " ░".repeat(empty_blocks)
+	var fuel_bar = " []".repeat(filled_blocks) + " - ".repeat(empty_blocks)
 	# Aktualisiere Label
 	fuel_label.text = fuel_bar
 
